@@ -34,18 +34,29 @@ University of Oregon\\
 \maketitle
 
 \section{Introduction}
-The explosion of data in the past decade has lead to many questions on what the most efficient method to work with this data is. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.".  With so much data, the challenge of finding the pertaining data given the user, for example, the inbox for a personal email becomes a challenge.
+The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to anaylze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more percisely, in 2003, 6.8 exabytes were being created every 2 days,\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
 \par
-A large majority of the data being created is in dependant from each other, ex. different users on an on-line shopping platform.  This observation is exploited in the form of parallel computation where instead of a single computer processing data sequentially, the task is divided into many sub tasks and processed indepndnatly.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
+In order to solve this problem, a very important insight is to notice that a large majority of the data being created is independant from each other, ex. different users on an on-line shopping platform where every shopper has their own indepdant profile, shopping cart and payment information.  Indepdance within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many sub tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
 \par
-Such parallel computation systems have existed since, the 1980's, in order to keep up with the demands of , more and more complex features.  The goal of this survey paper is then to compare the three main systems, parallel dbms systems, mostly used in the past.  Map reduce, which has gained much attention since its introduction in 2004, and finally, new emerging systems such as Apache spark that takes the lessons learned from the prior work and incorporates new ideas into its core design.
+These parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  As well, alternative computation frameworks introduced recently such as map reduce or apache spark have taken a  similary appraoch to that used by databases, parallel computation.  The goal of this survey paper is to firstly introduce these different data querry systems and their variants.  Secondly, discuess the common approaches all of them use to speed up computation and finally highlight unique aspects of each system.
 
+\section{Basic Description of Functionality}
 
-\section{Distributed Parallel Processor Requirements}
+A data processing solution should satisfy the following functionality:
+\begin{enumerate}	
+	\item Compute a user defined querry in a reasonable time.
+	\item Guranante high degree of fault tolerance.
+\end{enumerate}
 
-    All the Distributed Computation frameworks discussed in this survey paper all share x common features.  Map reduce follow much of the same
-    
-    
+\subsection{Parallel Computation}
+The framework can process indepedant querries in parallel.  For example, seaching for all students who owe more than 10,000 dollars in student loans
+can be querried in parallel, each student can be treated independantly.
+
+\subsection{Distributed Computation}
+The framework is able to distribute the data set across multiple compute machines.  Each machine might contain indepdant data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
+If the querry were to find all students that had more than 10,000 in student loans but also a 4.0 gpa in order to give them a financial award, then each querry per student would need to look at the data in both compute machines.
+
+ 
 \section{Map Reduce}
 \subsection{Introduction}
 Map Reduce is a distributed parallel processing framework introduced in 2004\cite{dean2001mapreduce}.  Since then, it has become very prominent, with many spin offs such as Hadoop.  Map is favored for its relaxed synchronization constraints, which results in a smaller overhead when compared to more complex constraints.  Map reduce allows a developer to bring the computation to the data by using a two step approach of first mapping, (filtering) and then reduce step which merges the results.
