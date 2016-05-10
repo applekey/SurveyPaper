@@ -34,29 +34,55 @@ University of Oregon\\
 \maketitle
 
 \section{Introduction}
-The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to anaylze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more percisely, in 2003, 6.8 exabytes were being created every 2 days,\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
+The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more percisely, in 2003, 6.8 exabytes were being created every 2 days,\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
 \par
-In order to solve this problem, a very important insight is to notice that a large majority of the data being created is independant from each other, ex. different users on an on-line shopping platform where every shopper has their own indepdant profile, shopping cart and payment information.  Indepdance within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many sub tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
+In order to solve this problem, a very important insight is to notice that a large majority of the data being created is independent from each other, ex. different users on an on-line shopping platform where every shopper has their own independent profile, shopping cart and payment information.  Independence within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many sub tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
 \par
-These parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  As well, alternative computation frameworks introduced recently such as map reduce or apache spark have taken a  similary appraoch to that used by databases, parallel computation.  The goal of this survey paper is to firstly introduce these different data querry systems and their variants.  Secondly, discuess the common approaches all of them use to speed up computation and finally highlight unique aspects of each system.
+These parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  As well, alternative computation frameworks introduced recently such as map reduce or Apache Spark have taken a  similarly approach to that used by databases, parallel computation.  The goal of this survey paper is to firstly introduce these different data query systems and their variants.  Secondly, discuss the common approaches all of them use to speed up computation and finally highlight unique aspects of each system.
 
 \section{Basic Description of Functionality}
 
 A data processing solution should satisfy the following functionality:
 \begin{enumerate}	
-	\item Compute a user defined querry in a reasonable time.
-	\item Guranante high degree of fault tolerance.
+	\item Guarantee high degree of fault tolerance.
+	\item Compute a user defined query in a reasonable time.
 \end{enumerate}
 
+\subsection{Fault Tolerance}
+Fault tolerance is the most important guarantee that a computation framework provides.  Without consistency, the data being returned from the query cannot be used for any meaningful analysis. Fault tolerance means recovery from failure from multiple sources
+
+\begin{enumerate}
+	\item Network fault, communication between compute nodes is unreliable and data is lost in between
+	\item System fault, OS failure
+	\item Hardware fault, compute computer hard disk fails
+	\item User fault, user query has code that leaves query engine in a bad state
+\end{enumerate}
+
+In order for user defined queries to complete in a reasonable time, two levels of parallization can be applied.
+
 \subsection{Parallel Computation}
-The framework can process indepedant querries in parallel.  For example, seaching for all students who owe more than 10,000 dollars in student loans
-can be querried in parallel, each student can be treated independantly.
+The framework can process independent queries in parallel.  For example, searching for all students who owe more than 10,000 dollars in student loans
+can be queried in parallel, each student can be treated independently.
 
 \subsection{Distributed Computation}
-The framework is able to distribute the data set across multiple compute machines.  Each machine might contain indepdant data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
-If the querry were to find all students that had more than 10,000 in student loans but also a 4.0 gpa in order to give them a financial award, then each querry per student would need to look at the data in both compute machines.
+The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example in figure  \ref{fig:distDataDependency}, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
+If the query were to find all students that had more than 10,000 in student loans but also a 4.0 GPA in order to give them a financial award, then each query per student would need to look at the data in both compute machines.
 
- 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.12]{images/parallelComputation.png}
+\caption{Distributed Data Dependency}
+\label{fig:distDataDependency}
+\end{figure}
+
+
+%-----------------------------Good ends here----------------------------------------------------------
+
+
+
+
+
+
 \section{Map Reduce}
 \subsection{Introduction}
 Map Reduce is a distributed parallel processing framework introduced in 2004\cite{dean2001mapreduce}.  Since then, it has become very prominent, with many spin offs such as Hadoop.  Map is favored for its relaxed synchronization constraints, which results in a smaller overhead when compared to more complex constraints.  Map reduce allows a developer to bring the computation to the data by using a two step approach of first mapping, (filtering) and then reduce step which merges the results.
