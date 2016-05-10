@@ -65,7 +65,7 @@ The framework can process independent queries in parallel.  For example, searchi
 can be queried in parallel, each student can be treated independently.
 
 \subsection{Distributed Computation}
-The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example in figure  \ref{fig:distDataDependency}, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
+The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example in figure \ref{fig:distDataDependency}, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
 If the query were to find all students that had more than 10,000 in student loans but also a 4.0 GPA in order to give them a financial award, then each query per student would need to look at the data in both compute machines.
 
 \begin{figure}[h]
@@ -76,54 +76,38 @@ If the query were to find all students that had more than 10,000 in student loan
 \end{figure}
 
 
-%-----------------------------Good ends here----------------------------------------------------------
+%-----------------------------------------------------Good ends here----------------------------------------------------------
+\section{Databases Management Systems}
+
+Databases management systems are systems that store data in tabular tables with set schemas.  DBMS systems use relational queries to perform CRUD 
+(Create, read, update and delete)operations on the stored data.  
+
+\subsection{Parallel DBMS}
+
+Relational queries are idealy suited to run parallel since they
+each operation declares independant operations on independant data sets \cite{dewitt1992parallel}.  By partiioning the data amoung mulitple proessors, a single querry can be carried out in parallel and the result merged into a final step.  In figure \ref{fig:disDBMS}, an independant scan (ex, look for key word) is applied and the results are sorted (binned by first letter) and then the result of each independant operation is merged into the final result.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.12]{images/parDBMS.png}
+\caption{Distributed Data Dependency}
+\label{fig:disDBMS}
+\end{figure}
+
+\subsection{Distributed DBMS}
+
+Distributed DBMS systems require an additional layer of abstraction on top of Parallel DBMS.  Where as in parallel DBMS systems, all querries are run on the same machine sharing the same memory space.  Distributed DBMS systems need to consider the additonal factor of latency when access data that does not reside in the current compute machine.  Additionaly, distributed DBMS systems need to consider what impact does the memory laytout have in preventing easily addming more compute nodes.  
+
+Generally speaking, there are three main types of memory 
+archtectures for distributed DBMS systems, shared-memory, shared-disk and shared-nothing.
+
+\subsubsection{Shared Memory}
 
 
 
 
 
 
-\section{Map Reduce}
-\subsection{Introduction}
-Map Reduce is a distributed parallel processing framework introduced in 2004\cite{dean2001mapreduce}.  Since then, it has become very prominent, with many spin offs such as Hadoop.  Map is favored for its relaxed synchronization constraints, which results in a smaller overhead when compared to more complex constraints.  Map reduce allows a developer to bring the computation to the data by using a two step approach of first mapping, (filtering) and then reduce step which merges the results.
-\subsection{Implementation}
-The Map Reduce model follows two core steps, the map step and then the reduce step.  Initially, data is fed into the map step as key value pairs.  The map step itself is user-defined filter that applies the filter to each entry of the input key value pairs.  The reduce step then aggregates the results of the first filter step into key value pairs of the first.
-\par
-The Hadoop implementation of Map Reduce is built upon a Data storage layer called the Hadoop DFS.  HDFS is a block-structured file system that is managed by a master node.  When the user specifies the data set that the map reduce program will operate on, the underlying HDFS will partition the data into multiple homogeneous blocks, typically about 64 MB and triple duplicate the input data to guarantee fault tolerance.  Each data block is then assigned to a mapper and the processes begins.
-\par
-Within each local data set, after the map has completed a local sort is applied in-order to combine entries that share the same key, for example, {k1, v1,v2,v3,v4}.  This is done in order to minimize the amount of data that has to be transfer ed inter node. A combine step can be applied furrther, for example v1+v2+v3+v5.  This data is then stored to disk, there is a barrier, once all the data partitions have being processed for the first step can then the reduce step proceed.  
-\par
-Just like with the map phase, the intermediate data is stored into R partitions, where R is the number of reduce processors.
-\subsection{Architecture}
-The Hadoop Map Reduce Architecture consist of three major components, the client, the master node and the slave nodes.  The client intially contains the data that needs to be analyzed, this can be un-structured data ex, web pages, system logs, simulation results.  The master node has two roles, the first is partition the data from the client to the hdfs and the second is assigning map reduce tasks to work on these data partitions.
-\includegraphics[width=6cm, height=6cm]{masterNode.png}
-Within the master node, the Name Node helps in coordinating the hdfs and the job tracker helps in coordinating parallel execution of map reduce.
-\includegraphics[width=6cm, height=6cm]{slaveNode.png}
-The slave node communicate and recieve instructions from the master node and performs the map/reduce  tasks.
-\includegraphics[width=6cm, height=6cm]{mapreduce.png}
-
-***** failure schemes *******************
-not sure if there is room
-
-
-\section{Parallel DBMS systems}
-http://research.microsoft.com/en-us/um/people/gray/papers/CacmParallelDB.pdf
-Parallel DBMS systems are a high level wrapper that allow database systems to work in a distributed environment.  The features that a single node DBMS system provide such as the ACID guarantees within a transaction are still provided.  
-
-
-Relational queries are
-ideally suited to parallel execution; they consist of uniform operations applied to uniform streams
-of data. Each operator produces a new relation, so the operators can be composed into highly
-parallel dataflow graphs. By streaming the output of one operator into the input of another
-operator, the two operators can work in series giving pipelined parallelism. By partitioning the
-input data among multiple processors and memories, an operator can often be split into many
-independent operators each working on a part of the data. This partitioned data and execution
-gives partitioned parallelism (Figure 1).
-
-
--> Their modular architectures
-enable systems to grow incrementally, adding MIPS, memory, and disks either to speedup the
-processing of a given job, or to scaleup the system to process a larger job in the same time
 
 
 Parallelism between DBMS systems can be roughly generalized into three types: shared- memory, shared-disk, and shared-nothing.
@@ -257,6 +241,57 @@ Figure 7: Merging the inputs and partitioning the output of an operator. ***** j
 \section{Efficiency}
 
 \section{Fault tolerance}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Map Reduce}
+\subsection{Introduction}
+Map Reduce is a distributed parallel processing framework introduced in 2004\cite{dean2001mapreduce}.  Since then, it has become very prominent, with many spin offs such as Hadoop.  Map is favored for its relaxed synchronization constraints, which results in a smaller overhead when compared to more complex constraints.  Map reduce allows a developer to bring the computation to the data by using a two step approach of first mapping, (filtering) and then reduce step which merges the results.
+\subsection{Implementation}
+The Map Reduce model follows two core steps, the map step and then the reduce step.  Initially, data is fed into the map step as key value pairs.  The map step itself is user-defined filter that applies the filter to each entry of the input key value pairs.  The reduce step then aggregates the results of the first filter step into key value pairs of the first.
+\par
+The Hadoop implementation of Map Reduce is built upon a Data storage layer called the Hadoop DFS.  HDFS is a block-structured file system that is managed by a master node.  When the user specifies the data set that the map reduce program will operate on, the underlying HDFS will partition the data into multiple homogeneous blocks, typically about 64 MB and triple duplicate the input data to guarantee fault tolerance.  Each data block is then assigned to a mapper and the processes begins.
+\par
+Within each local data set, after the map has completed a local sort is applied in-order to combine entries that share the same key, for example, {k1, v1,v2,v3,v4}.  This is done in order to minimize the amount of data that has to be transfer ed inter node. A combine step can be applied furrther, for example v1+v2+v3+v5.  This data is then stored to disk, there is a barrier, once all the data partitions have being processed for the first step can then the reduce step proceed.  
+\par
+Just like with the map phase, the intermediate data is stored into R partitions, where R is the number of reduce processors.
+\subsection{Architecture}
+The Hadoop Map Reduce Architecture consist of three major components, the client, the master node and the slave nodes.  The client intially contains the data that needs to be analyzed, this can be un-structured data ex, web pages, system logs, simulation results.  The master node has two roles, the first is partition the data from the client to the hdfs and the second is assigning map reduce tasks to work on these data partitions.
+\includegraphics[width=6cm, height=6cm]{masterNode.png}
+Within the master node, the Name Node helps in coordinating the hdfs and the job tracker helps in coordinating parallel execution of map reduce.
+\includegraphics[width=6cm, height=6cm]{slaveNode.png}
+The slave node communicate and recieve instructions from the master node and performs the map/reduce  tasks.
+\includegraphics[width=6cm, height=6cm]{mapreduce.png}
+
+***** failure schemes *******************
+not sure if there is room
+
+
 
 
 \subsection{Hadoop}
