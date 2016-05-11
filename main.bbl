@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{gantz2010digital}
+John Gantz and David Reinsel,
+\newblock ``The digital universe decade-are you ready,''
+\newblock {\em IDC iView}, 2010.
+
+\bibitem{dewitt1992parallel}
+David DeWitt and Jim Gray,
+\newblock ``Parallel database systems: the future of high performance database
+  systems,''
+\newblock {\em Communications of the ACM}, vol. 35, no. 6, pp. 85--98, 1992.
+
+\bibitem{dean2001mapreduce}
+Jeffrey Dean and Sanjay Ghemawat,
+\newblock ``Mapreduce: Simplified data processing on large clusters, osdi’04:
+  Sixth symposium on operating system design and implementation, san francisco,
+  ca, december, 2004,''
+\newblock {\em S. Dill, R. Kumar, K. McCurley, S. Rajagopalan, D. Sivakumar, ad
+  A. Tomkins, Self-similarity in the Web, Proc VLDB}, 2001.
+
+\end{thebibliography}
