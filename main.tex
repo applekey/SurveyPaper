@@ -82,6 +82,8 @@ If the query were to find all students that had more than 10,000 in student loan
 Databases management systems are systems that store data in tabular tables with set schemas.  DBMS systems use relational queries to perform CRUD 
 (Create, read, update and delete)operations on the stored data.  
 
+\fix{write more here}
+
 \subsection{Parallel DBMS}
 
 Relational queries are idealy suited to run parallel since they
@@ -99,9 +101,88 @@ each operation declares independant operations on independant data sets \cite{de
 Distributed DBMS systems require an additional layer of abstraction on top of Parallel DBMS.  Where as in parallel DBMS systems, all querries are run on the same machine sharing the same memory space.  Distributed DBMS systems need to consider the additonal factor of latency when access data that does not reside in the current compute machine.  Additionaly, distributed DBMS systems need to consider what impact does the memory laytout have in preventing easily addming more compute nodes.  
 
 Generally speaking, there are three main types of memory 
-archtectures for distributed DBMS systems, shared-memory, shared-disk and shared-nothing.
+archtectures for distributed DBMS systems, shared-nothing, shared-memory, shared-disk.
 
-\subsubsection{Shared Memory}
+\begin{enumerate}
+\item Shared-Memory: All compute machines share access to a global memory as well as disk storage.  
+\item Shared-Disk: Each compute machines have their own memory, but share global disk.
+\item Shared Nothing: Each compute machine has their own memory and disk. 
+\end{enumerate}
+
+\subsection{Fault Tolerance}
+
+
+\section {Map Reduce}
+
+Map Reduce is a general distributed computation framework introduced by Google in 2004 \cite{dean2001mapreduce}.  Map reduce is different from distributed DBMS systems in that much more general computations can be defined, not limited by the querry language of a rigit schema as is the case with DBMS systems.  Map Reduce, like DBMS systems have fault tolerance mechanisms but they operate differently than DBMS systems due to the archetcutral differences. 
+
+\subsection{Mapper and Reducer}
+Map reduce operates in two steps, the map step and then the reduce step.  Both steps are independant in that the reduce step will not start until all mappers have completed.
+In the map stage, the data is partitioned equally among N mappers.  Input data arrives to the mapper as a list of (key, value) pairs, the mapper applies a user-defined map operation.
+The map operation produces intermediate (key, value) pairs which are the results of the map operations.  
+\par
+The reducer is again a user defined operation that processes the intermediate values from the mapper grouped by key.  The reducer can produce zero or an aggregate of all values
+that map to the same key.
+
+Figure \ref{fig:mapReduce} gives an execution diagram.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.12]{images/mapReduce.png}
+\caption{Map Reduce Program Execution}
+\label{fig:mapReduce}
+\end{figure}
+
+\subsection{Hadoop}
+There are two very popular frameworks that implmement the map reduce concept, these are the closed source Google Map Reduce and open source version Hadoop Map Reduce.  
+This paper will focus on Hadoop instead of Google Map Reduce since the complete details of Google Map Reduce and relatively unknown, however both frameworks function similarly.
+Hadoop has 
+
+
+
+
+\subsection{Fault Tolerance}
+
+
+
+
+
+Analgous to parallel DBMS, the map and reduce step are very similar to a filter and reduce.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The Map Reduce model follows two core steps, the map step and then the reduce step.  Initially, data is fed into the map step as key value pairs.  The map step itself is user-defined filter that applies the filter to each entry of the input key value pairs.  The reduce step then aggregates the results of the first filter step into key value pairs of the first.
+\par
+The Hadoop implementation of Map Reduce is built upon a Data storage layer called the Hadoop DFS.  HDFS is a block-structured file system that is managed by a master node.  When the user specifies the data set that the map reduce program will operate on, the underlying HDFS will partition the data into multiple homogeneous blocks, typically about 64 MB and triple duplicate the input data to guarantee fault tolerance.  Each data block is then assigned to a mapper and the processes begins.
+\par
+Within each local data set, after the map has completed a local sort is applied in-order to combine entries that share the same key, for example, {k1, v1,v2,v3,v4}.  This is done in order to minimize the amount of data that has to be transfer ed inter node. A combine step can be applied furrther, for example v1+v2+v3+v5.  This data is then stored to disk, there is a barrier, once all the data partitions have being processed for the first step can then the reduce step proceed.  
+\par
+Just like with the map phase, the intermediate data is stored into R partitions, where R is the number of reduce processors.
+\subsection{Architecture}
+The Hadoop Map Reduce Architecture consist of three major components, the client, the master node and the slave nodes.  The client intially contains the data that needs to be analyzed, this can be un-structured data ex, web pages, system logs, simulation results.  The master node has two roles, the first is partition the data from the client to the hdfs and the second is assigning map reduce tasks to work on these data partitions.
+\includegraphics[width=6cm, height=6cm]{masterNode.png}
+Within the master node, the Name Node helps in coordinating the hdfs and the job tracker helps in coordinating parallel execution of map reduce.
+\includegraphics[width=6cm, height=6cm]{slaveNode.png}
+The slave node communicate and recieve instructions from the master node and performs the map/reduce  tasks.
+\includegraphics[width=6cm, height=6cm]{mapreduce.png}
+
+
 
 
 
@@ -269,27 +350,6 @@ Figure 7: Merging the inputs and partitioning the output of an operator. ***** j
 
 
 
-\section{Map Reduce}
-\subsection{Introduction}
-Map Reduce is a distributed parallel processing framework introduced in 2004\cite{dean2001mapreduce}.  Since then, it has become very prominent, with many spin offs such as Hadoop.  Map is favored for its relaxed synchronization constraints, which results in a smaller overhead when compared to more complex constraints.  Map reduce allows a developer to bring the computation to the data by using a two step approach of first mapping, (filtering) and then reduce step which merges the results.
-\subsection{Implementation}
-The Map Reduce model follows two core steps, the map step and then the reduce step.  Initially, data is fed into the map step as key value pairs.  The map step itself is user-defined filter that applies the filter to each entry of the input key value pairs.  The reduce step then aggregates the results of the first filter step into key value pairs of the first.
-\par
-The Hadoop implementation of Map Reduce is built upon a Data storage layer called the Hadoop DFS.  HDFS is a block-structured file system that is managed by a master node.  When the user specifies the data set that the map reduce program will operate on, the underlying HDFS will partition the data into multiple homogeneous blocks, typically about 64 MB and triple duplicate the input data to guarantee fault tolerance.  Each data block is then assigned to a mapper and the processes begins.
-\par
-Within each local data set, after the map has completed a local sort is applied in-order to combine entries that share the same key, for example, {k1, v1,v2,v3,v4}.  This is done in order to minimize the amount of data that has to be transfer ed inter node. A combine step can be applied furrther, for example v1+v2+v3+v5.  This data is then stored to disk, there is a barrier, once all the data partitions have being processed for the first step can then the reduce step proceed.  
-\par
-Just like with the map phase, the intermediate data is stored into R partitions, where R is the number of reduce processors.
-\subsection{Architecture}
-The Hadoop Map Reduce Architecture consist of three major components, the client, the master node and the slave nodes.  The client intially contains the data that needs to be analyzed, this can be un-structured data ex, web pages, system logs, simulation results.  The master node has two roles, the first is partition the data from the client to the hdfs and the second is assigning map reduce tasks to work on these data partitions.
-\includegraphics[width=6cm, height=6cm]{masterNode.png}
-Within the master node, the Name Node helps in coordinating the hdfs and the job tracker helps in coordinating parallel execution of map reduce.
-\includegraphics[width=6cm, height=6cm]{slaveNode.png}
-The slave node communicate and recieve instructions from the master node and performs the map/reduce  tasks.
-\includegraphics[width=6cm, height=6cm]{mapreduce.png}
-
-***** failure schemes *******************
-not sure if there is room
 
 
 
