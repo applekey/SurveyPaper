@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  11 MAY 2016 19:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  11 MAY 2016 22:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -187,7 +187,11 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@vleads=\box30
 \tabu@cellskip=\skip50
 )
-(./main.aux)
+(./main.aux
+
+LaTeX Warning: Label `table:hadoopVsDBMS' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -329,32 +333,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--223
 
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 249.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 249.
 
-Overfull \hbox (5.83282pt too wide) in paragraph at lines 249--260
- [][] 
+Underfull \hbox (badness 1270) in paragraph at lines 249--250
+[]\T1/ptm/m/n/10 Again, Hadoop is con-sid-er-ably slower than DBMS-x
  []
 
-(./main.bbl) [4] (./main.aux) ) 
+[4]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 256.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 256.
+
+Overfull \hbox (28.74397pt too wide) in paragraph at lines 266--266
+[]\T1/ptm/m/n/10 Hadoop/DBMS- 
+ []
+
+
+Overfull \hbox (13.9788pt too wide) in paragraph at lines 315--316
+[]\T1/ptm/m/n/10 https://chamibuddhika.wordpress.com/2012/02/26/joins-with-
+ []
+
+(./main.bbl) [5] (./main.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2966 strings out of 493089
- 40631 string characters out of 6134842
- 105644 words of memory out of 5000000
- 6366 multiletter control sequences out of 15000+600000
+ 2967 strings out of 493089
+ 40650 string characters out of 6134842
+ 110694 words of memory out of 5000000
+ 6367 multiletter control sequences out of 15000+600000
  60941 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,14n,24p,697b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dv
-ips/base/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8
-a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (4 pages, 192719 bytes).
+ 38i,15n,24p,914b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (5 pages, 219981 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 21 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

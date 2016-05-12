@@ -230,40 +230,90 @@ At the time, it was concluded that relational are easier to understand and modif
 
 \section{Map Reduce versus DBMS Performance}
 
-Hadoop Map Reduce and Parallel DBMS systems compared in performance for three category of tasks on a 100 node cluster.  The execution times between the two are presented in table \ref{table:1}.  
+Hadoop Map Reduce and Parallel DBMS systems compared in performance for three category of tasks on a 100 node cluster.  The execution times between the two are presented in table \ref{table:hadoopVsDBMS}.  
 
 \subsection{System Configurations}
 Both map reduce and DBMS systems were deployed on a 100 node cluster.  Each node has a single 2.40 GHz Intel Core 2 Duo with 4GB of ram and two 250GB SATA-I hard disks.  All 100 nodes were connected using two gigabyte 128 Gbps Ethernet switch with 50 nodes per switch.
 
 \subsection{Grep Task}
 
-The first task was the grep task as was presented in the original Google Map Reduce paper.  This task involved searching for a specific keyword that occurred once every 1000 (key, value) pairs. 
+The first task was the grep task as was presented in the original Google Map Reduce paper.  This task involved searching for a specific keyword that occurred once every 1000 (key, value) pairs.   The total data set consisted of 1 TB split amount 100 nodes.  Per node, 10 GB of records consisting of 100B records was partitioned to assigned map tasks.  This test was designed to measure pure IO throughput of the two systems.  This grep task is designed such that both Hadoop Map Reduce and DBMS-x are not able to take advantage of indexes.  In addition, there is no reduce step in this experiment since if the specific keyword is found, it is outputted as the result.
+\par
+One would expect Hadoop to perform well in comparison to DBMS-x since Hadoop has a much simpler initialization mechanism, simply load data via (key, value) pairs.  However, referring to table \ref{table:hadoopVsDBMS}, Hadoop was 1.5 slower.  This slow down can be attributed to the need for repetitive record record parsing.  Since Hadoop does not have any special storage formats, such as DBMS data indexing and messaging, it is up to the use's code to  read in and write out data in the appropriate format.  In Hadoop's native language Java, (key, value) pairs are stored as immutable strings.  This means anytime any modification on any (key,value) pairs are done, the original string is deleted and re-created in memory.
+\par
+Secondly, DBMS systems are well matured products with highly efficient data compression algorithms.  In the study, it was found that enabling compression on DBMS systems enabled performance by a factor of two to four \ref{table:hadoopVsDBMS}.  On the other hand, there has not being a lot of work on Hadoop and data compression, at most a 15 percent performance boost was seen \cite{dean2001mapreduce}.
+
 \subsection{Web Log Task}
+The second task is a SQL aggregation, "GROUP BY" clause on a table of user visits in a Web server log.  The data set used is a 2TB data set with a total of 155 million records distributed over 100 nodes, translating to 20 GB of data per node.  Each node runs the group by and records to total ad revenue for each IP address.  Similar to the previous Grep experiment, all records must be scanned and there no advantage is gained from indexing.  This experiment involves a reduce step in order to collect all visits from different IP addresses.
+\par
+Again, Hadoop is considerably slower than DBMS-x in performance.  The addition of a reduce step, where (key,value) immutable string pairs have to be serialized and de serialized may be the reason why this task has worse performance than the Grep task.
 
 \subsection {Join Task}
-
-
+The final task is a situation where map reduce model is inadequate in handling. The final task consist of a complex join operation over two tables which require both an aggregation and then filtering.   The data set utilizes the use visits from the previous join task joined with another 100 GB table of PageRank values that consist of 18 million URL's.  The first part consists of the system locating the IP address that generates the most revenue within a set range in the user visits data set.  The intermediate result records are then joined with the PageRank table and used to calculate the average Page Rank of all the pages visited during this interval.   Referring to table \ref{table:hadoopVsDBMS}, Hadoop is considerably, 36.3x slower than DBMS systems.  In the next paragraph, we will given some insight as to why the map reduce model fails so far when it comes to joins.
 
 \begin{table}[h!]
 	\centering
-\begin{tabu} to 0.5\textwidth { | X[l] | X[c] | X[r] | }
+\begin{tabu} to 0.4\textwidth { | X[l] | X[c] | X[r] | X[l] |}
 	\hline
-    & Hadoop & DBMS-x \\
+    & Hadoop & DBMS-x & Hadoop/DBMS-x\\ 
 	\hline
-	Grep  & 284s  & 194s  \\
+	Grep  & 284s  & 194s  & 1.5x  \\
 	\hline
-	Web Log  & 1,146s  & 740s  \\
+	Web Log  & 1,146s  & 740s& 1.6x  \\
 	\hline
-	Join  & 1,1158s  & 32s  \\
+	Join  & 1,1158s  & 32s& 36.3x  \\
 	\hline
 \end{tabu}
 \caption{Hadoop vs DBMS-x performance}
-\label{table:1}
+\label{table:hadoopVsDBMS}
 \end{table}
 
+\section{Joins in DBMS vs Map Reduce}
+
+Take an example data set consisting of two tables, Employees and Department
+\begin{table}[h!]
+	\centering
+	\begin{tabu} to 0.4\textwidth { | X[l] | X[c] | X[r]  |}
+		\hline
+		Name & Age & Dept Id\\ 
+		\hline
+		Alex  & 26  & 2  \\
+		\hline
+		Ben & 24  & 2  \\
+		\hline
+		Sarah  & 34  &5  \\
+		\hline
+	\end{tabu}
+	\caption{Employees Table}
+	\label{table:}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabu} to 0.4\textwidth { | X[l] | X[c] |}
+		\hline
+		 Department Id & Name\\ 
+		\hline
+		5  & Marketing   \\
+		\hline
+		2  & Engineering    \\
+		\hline
+		3& Sales  \\
+		\hline
+	\end{tabu}
+	\caption{Hadoop vs DBMS-x performance}
+	\label{table:hadoopVsDBMS}
+\end{table}
+
+Suppose the following Join was carried out, " Select * from Employees join Department on Employees.DepartmentId = Department.DepartmentId".
+When this query is run on a DBMS system, the system has two options, in most situations' it will use the data's indexes to its advantage and carry out a hash join which is $O(1)$ time or at worst carry out a index join,$ O(log N) $time.  Also, all data representations are internally maintained in the database and no extraneous conversions are carried out.
+\par
+Having this query carried out through Map Reduce runs through a similar execution model, first a filter then an aggregate.  However, since the data have no indexes, hashing and divide and conquer techniques cannot be applied.  Every operation between the two tables is an $O(n^2)$ operation.  As well, there are extraneous serialization/de-serialization steps in between the map and filter steps.  The following section gives an example flow diagram as well as mapper and reduce pseudo code to demonstrate the join.
 
 
-\subsection{}
+
+https://chamibuddhika.wordpress.com/2012/02/26/joins-with-map-reduce/
+
 
 
 
