@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 14:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,69 +397,74 @@ Overfull \hbox (56.4213pt too wide) in paragraph at lines 324--325
  [][] 
  []
 
-! Argument of \lst@title@dropdelim has an extra }.
-<inserted text> 
-                \par 
-l.329 ...ng} [caption=Reducer code,label=joinCode]
-                                                  
-I've run across a `}' that doesn't seem to match anything.
-For example, `\def\a#1{...}' and `\a}' would produce
-this error. If you simply proceed now, the `\par' that
-I've just inserted will cause me to report a runaway
-argument that might be the root of the problem. But if
-your `}' was spurious, just type `2' and it will go away.
-
-Runaway argument?
-! Paragraph ended before \lst@title@dropdelim was complete.
-<to be read again> 
-                   \par 
-l.329 ...ng} [caption=Reducer code,label=joinCode]
-                                                  
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.329 ...ng} [caption=Reducer code,label=joinCode]
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[5 <./images/mapReduceJoin.png>]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 331.
- (./main.bbl) [6
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 332.
+[5 <./images/mapReduceJoin.png>] (./main.bbl
+Underfull \hbox (badness 10000) detected at line 3
+\T1/ptm/m/n/8 [1]
+ []
 
-] (./main.aux)
+
+Underfull \hbox (badness 10000) detected at line 8
+\T1/ptm/m/n/8 [2]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 14
+\T1/ptm/m/n/8 [3]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 22
+\T1/ptm/m/n/8 [4]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 29
+\T1/ptm/m/n/8 [5]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 36
+\T1/ptm/m/n/8 [6]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 42
+\T1/ptm/m/n/8 [7]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 50
+\T1/ptm/m/n/8 [8]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 57
+\T1/ptm/m/n/8 [9]
+ []
+
+) [6] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
- )
-(\end occurred when \iftrue on line 329 was incomplete) 
+ ) 
 Here is how much of TeX's memory you used:
- 4364 strings out of 493089
- 61112 string characters out of 6134842
- 143154 words of memory out of 5000000
- 7741 multiletter control sequences out of 15000+600000
+ 4377 strings out of 493089
+ 61319 string characters out of 6134842
+ 136211 words of memory out of 5000000
+ 7754 multiletter control sequences out of 15000+600000
  66466 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,914b,1071s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015
-/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2015/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/tim
-es/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a
-.pfb>
-Output written on main.pdf (6 pages, 286711 bytes).
+ 38i,15n,58p,914b,1610s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (6 pages, 291727 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  34 compressed objects within 1 object stream

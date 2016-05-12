@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: IEEE.bst
 Database file #1: citations.bib
-You've used 6 entries,
+You've used 12 entries,
             1838 wiz_defined-function locations,
-            490 strings with 4819 characters,
-and the built_in function-call counts, 1749 in all, are:
-= -- 170
-> -- 69
-< -- 3
-+ -- 25
-- -- 19
-* -- 118
-:= -- 258
-add.period$ -- 9
-call.type$ -- 6
-change.case$ -- 6
+            521 strings with 6324 characters,
+and the built_in function-call counts, 4003 in all, are:
+= -- 374
+> -- 198
+< -- 6
++ -- 70
+- -- 58
+* -- 313
+:= -- 597
+add.period$ -- 18
+call.type$ -- 12
+change.case$ -- 12
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 85
-empty$ -- 165
-format.name$ -- 19
-if$ -- 413
+cite$ -- 12
+duplicate$ -- 174
+empty$ -- 355
+format.name$ -- 58
+if$ -- 923
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 6
-newline$ -- 33
-num.names$ -- 6
-pop$ -- 23
+int.to.str$ -- 12
+missing$ -- 12
+newline$ -- 63
+num.names$ -- 12
+pop$ -- 44
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 53
+skip$ -- 100
 stack$ -- 0
-substring$ -- 118
-swap$ -- 36
-text.length$ -- 3
+substring$ -- 309
+swap$ -- 74
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 17
-width$ -- 7
-write$ -- 69
+while$ -- 38
+width$ -- 14
+write$ -- 138

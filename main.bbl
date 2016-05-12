@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{gantz2010digital}
 John Gantz and David Reinsel,
@@ -38,5 +38,47 @@ Foto~N Afrati and Jeffrey~D Ullman,
 \newblock ``Optimizing joins in a map-reduce environment,''
 \newblock in {\em Proceedings of the 13th International Conference on Extending
   Database Technology}. ACM, 2010, pp. 99--110.
+
+\bibitem{chaiken2008scope}
+Ronnie Chaiken, Bob Jenkins, Per-{\AA}ke Larson, Bill Ramsey, Darren Shakib,
+  Simon Weaver, and Jingren Zhou,
+\newblock ``Scope: easy and efficient parallel processing of massive data
+  sets,''
+\newblock {\em Proceedings of the VLDB Endowment}, vol. 1, no. 2, pp.
+  1265--1276, 2008.
+
+\bibitem{olston2008pig}
+Christopher Olston, Benjamin Reed, Utkarsh Srivastava, Ravi Kumar, and Andrew
+  Tomkins,
+\newblock ``Pig latin: a not-so-foreign language for data processing,''
+\newblock in {\em Proceedings of the 2008 ACM SIGMOD international conference
+  on Management of data}. ACM, 2008, pp. 1099--1110.
+
+\bibitem{thusoo2009hive}
+Ashish Thusoo, Joydeep~Sen Sarma, Namit Jain, Zheng Shao, Prasad Chakka, Suresh
+  Anthony, Hao Liu, Pete Wyckoff, and Raghotham Murthy,
+\newblock ``Hive: a warehousing solution over a map-reduce framework,''
+\newblock {\em Proceedings of the VLDB Endowment}, vol. 2, no. 2, pp.
+  1626--1629, 2009.
+
+\bibitem{bu2010haloop}
+Yingyi Bu, Bill Howe, Magdalena Balazinska, and Michael~D Ernst,
+\newblock ``Haloop: efficient iterative data processing on large clusters,''
+\newblock {\em Proceedings of the VLDB Endowment}, vol. 3, no. 1-2, pp.
+  285--296, 2010.
+
+\bibitem{ekanayake2010twister}
+Jaliya Ekanayake, Hui Li, Bingjing Zhang, Thilina Gunarathne, Seung-Hee Bae,
+  Judy Qiu, and Geoffrey Fox,
+\newblock ``Twister: a runtime for iterative mapreduce,''
+\newblock in {\em Proceedings of the 19th ACM International Symposium on High
+  Performance Distributed Computing}. ACM, 2010, pp. 810--818.
+
+\bibitem{malewicz2010pregel}
+Grzegorz Malewicz, Matthew~H Austern, Aart~JC Bik, James~C Dehnert, Ilan Horn,
+  Naty Leiser, and Grzegorz Czajkowski,
+\newblock ``Pregel: a system for large-scale graph processing,''
+\newblock in {\em Proceedings of the 2010 ACM SIGMOD International Conference
+  on Management of data}. ACM, 2010, pp. 135--146.
 
 \end{thebibliography}
