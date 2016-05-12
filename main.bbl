@@ -33,4 +33,10 @@ Hung-chih Yang, Ali Dasdan, Ruey-Lung Hsiao, and D~Stott Parker,
 \newblock in {\em Proceedings of the 2007 ACM SIGMOD international conference
   on Management of data}. ACM, 2007, pp. 1029--1040.
 
+\bibitem{afrati2010optimizing}
+Foto~N Afrati and Jeffrey~D Ullman,
+\newblock ``Optimizing joins in a map-reduce environment,''
+\newblock in {\em Proceedings of the 13th International Conference on Extending
+  Database Technology}. ACM, 2010, pp. 99--110.
+
 \end{thebibliography}

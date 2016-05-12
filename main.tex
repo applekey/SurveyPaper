@@ -1,5 +1,9 @@
 \documentclass[10pt,twocolumn]{IEEEtran11}
-
+\usepackage{listings}
+\lstset{
+	frame = single, 
+	language=C++,
+	basicstyle=\tiny}
 \usepackage{times}
 \usepackage{epsfig}
 \usepackage[T1]{fontenc}
@@ -308,11 +312,38 @@ Take an example data set consisting of two tables, Employees and Department
 Suppose the following Join was carried out, " Select * from Employees join Department on Employees.DepartmentId = Department.DepartmentId".
 When this query is run on a DBMS system, the system has two options, in most situations' it will use the data's indexes to its advantage and carry out a hash join which is $O(1)$ time or at worst carry out a index join,$ O(log N) $time.  Also, all data representations are internally maintained in the database and no extraneous conversions are carried out.
 \par
-Having this query carried out through Map Reduce runs through a similar execution model, first a filter then an aggregate.  However, since the data have no indexes, hashing and divide and conquer techniques cannot be applied.  Every operation between the two tables is an $O(n^2)$ operation.  As well, there are extraneous serialization/de-serialization steps in between the map and filter steps.  The following section gives an example flow diagram as well as mapper and reduce pseudo code to demonstrate the join.
+Having this query carried out through Map Reduce runs through a similar execution model, first a filter then an aggregate.  However, since the data have no indexes, hashing and divide and conquer techniques cannot be applied.  Every operation between the two tables is an $O(n^2)$ operation.  As well, there are extraneous serialization/de-serialization steps in between the map and filter steps.  The following section gives an example flow diagram as well as mapper and reduce pseudo code to demonstrate the join \cite{afrati2010optimizing}.
+
+\subsection{Map Reduce Join}
+
+Joins in map reduce are run in $O(n^2)$ time due to lack of help from indexes or any table schema.  In the first stage, the mapper maps both tables using the join column as the key, this produces the intermediate results as shown in figure \ref{fig:mrJoin}, stage 1.  In stage 2, the mapper's local aggregation pairs all values per key, now both employees and department records share the same key. In stage 3, the reducer  runs a double for loop, looping through each employee record in the outer loop and then each department record in the inner loop, if the value's tag is not the same tag as the outer loop's tag, this means that these two values need to be joined.  The reducer's code for stage is include in code listing \ref{joinCode}, take note of line 5 as well line 6, where the tag comparison for tags as well join of values are run, these are expensive Java string operations. 
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/mapReduceJoin.png}
+	\caption{Join stages in map reduce}
+	\label{fig:mrJoin}
+\end{figure}
+
+\begin{lstlisting} [caption=Reducer code,label=joinCode]
+1. reduce (K dept_id, list<tagged_rec> tagged_recs)  {
+2.  for (tagged_rec : tagged_recs) {
+3.    for (tagged_rec1 : taagged_recs) {
+4.	  if (tagged_rec.tag != tagged_rec1.tag) {
+5.	    joined_rec = join(tagged_rec, tagged_rec1)
+6.  }
+7.  emit (tagged_rec.rec.Dept_Id, joined_rec)
+8.  }
+9. }
+\end{lstlisting}
 
 
 
-https://chamibuddhika.wordpress.com/2012/02/26/joins-with-map-reduce/
+\section{fdsafdsafsad}
+
+in \ref{joinCode}
+
 
 
 
