@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{tabu}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -229,12 +230,38 @@ At the time, it was concluded that relational are easier to understand and modif
 
 \section{Map Reduce versus DBMS Performance}
 
-Hadoop Map Reduce and Parallel DBMS systems compared in performance for two category of tasks.  The first, more read heavy and the second more computation heavy.  
-
-
+Hadoop Map Reduce and Parallel DBMS systems compared in performance for three category of tasks on a 100 node cluster.  The execution times between the two are presented in table \ref{table:1}.  
 
 \subsection{System Configurations}
 Both map reduce and DBMS systems were deployed on a 100 node cluster.  Each node has a single 2.40 GHz Intel Core 2 Duo with 4GB of ram and two 250GB SATA-I hard disks.  All 100 nodes were connected using two gigabyte 128 Gbps Ethernet switch with 50 nodes per switch.
+
+\subsection{Grep Task}
+
+The first task was the grep task as was presented in the original Google Map Reduce paper.  This task involved searching for a specific keyword that occurred once every 1000 (key, value) pairs. 
+\subsection{Web Log Task}
+
+\subsection {Join Task}
+
+
+
+\begin{table}[h!]
+	\centering
+\begin{tabu} to 0.5\textwidth { | X[l] | X[c] | X[r] | }
+	\hline
+    & Hadoop & DBMS-x \\
+	\hline
+	Grep  & 284s  & 194s  \\
+	\hline
+	Web Log  & 1,146s  & 740s  \\
+	\hline
+	Join  & 1,1158s  & 32s  \\
+	\hline
+\end{tabu}
+\caption{Hadoop vs DBMS-x performance}
+\label{table:1}
+\end{table}
+
+
 
 \subsection{}
 
