@@ -19,4 +19,18 @@ Jeffrey Dean and Sanjay Ghemawat,
 \newblock {\em S. Dill, R. Kumar, K. McCurley, S. Rajagopalan, D. Sivakumar, ad
   A. Tomkins, Self-similarity in the Web, Proc VLDB}, 2001.
 
+\bibitem{pavlo2009comparison}
+Andrew Pavlo, Erik Paulson, Alexander Rasin, Daniel~J Abadi, David~J DeWitt,
+  Samuel Madden, and Michael Stonebraker,
+\newblock ``A comparison of approaches to large-scale data analysis,''
+\newblock in {\em Proceedings of the 2009 ACM SIGMOD International Conference
+  on Management of data}. ACM, 2009, pp. 165--178.
+
+\bibitem{yang2007map}
+Hung-chih Yang, Ali Dasdan, Ruey-Lung Hsiao, and D~Stott Parker,
+\newblock ``Map-reduce-merge: simplified relational data processing on large
+  clusters,''
+\newblock in {\em Proceedings of the 2007 ACM SIGMOD international conference
+  on Management of data}. ACM, 2007, pp. 1029--1040.
+
 \end{thebibliography}

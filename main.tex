@@ -44,20 +44,22 @@ These parallel computation systems have existed since the 1980's, the most commo
 
 A data processing solution should satisfy the following functionality:
 \begin{enumerate}	
+\setlength\itemsep{1em}
 	\item Guarantee high degree of fault tolerance.
 	\item Compute a user defined query in a reasonable time.
 \end{enumerate}
 
 \subsection{Fault Tolerance}
 Fault tolerance is the most important guarantee that a computation framework provides.  Without consistency, the data being returned from the query cannot be used for any meaningful analysis. Fault tolerance means recovery from failure from multiple sources
-
+\  \\
 \begin{enumerate}
+	\setlength\itemsep{1em}
 	\item Network fault, communication between compute nodes is unreliable and data is lost in between
 	\item System fault, OS failure
 	\item Hardware fault, compute computer hard disk fails
 	\item User fault, user query has code that leaves query engine in a bad state
 \end{enumerate}
-
+\  \\
 In order for user defined queries to complete in a reasonable time, two levels of parallelization can be applied.
 
 \subsection{Parallel Computation}
@@ -100,24 +102,27 @@ Distributed DBMS systems require an additional layer of abstraction on top of Pa
 
 Generally speaking, there are three main types of memory 
 architectures for distributed DBMS systems, shared-nothing, shared-memory, shared-disk.
-
+\  \\
 \begin{enumerate}
+\setlength\itemsep{1em}
 \item Shared-Memory: All compute machines share access to a global memory as well as disk storage.  
 \item Shared-Disk: Each compute machines have their own memory, but share global disk.
 \item Shared Nothing: Each compute machine has their own memory and disk. 
 \end{enumerate}
 
 \subsection{Fault Tolerance}
+DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the general fault tolerance section.  DBMS systems take advantage of the schema and transactions implement restart at different granularity levels.  Through the use of larger compute node level transactions as well as much smaller procedural level transactions, DBMS systems are able to advantage of the work that has already being completed and restart at the most optimal point before the crash.
+
 
 
 \section {Map Reduce}
 
-Map Reduce is a general distributed computation framework introduced by Google in 2004 \cite{dean2001mapreduce}.  Map reduce is different from distributed DBMS systems in that much more general computations can be defined, not limited by the query language of a rigit schema as is the case with DBMS systems.  Map Reduce, like DBMS systems have fault tolerance mechanisms but they operate differently than DBMS systems due to the architectural differences. 
+Map Reduce is a general distributed computation framework introduced by Google in 2004 \cite{dean2001mapreduce}.  Map reduce is different from distributed DBMS systems in that much more general computations can be defined, not limited by the query language of a rigid schema as is the case with DBMS systems.  Map Reduce, like DBMS systems have fault tolerance mechanisms but they operate differently than DBMS systems due to the architectural differences. 
 
 \subsection{Mapper and Reducer}
 Map reduce operates in two steps, the map step and then the reduce step.  Both steps are independent in that the reduce step will not start until all mappers have completed.
 In the map stage, the data is partitioned equally among N mappers.  Input data arrives to the mapper as a list of (key, value) pairs, the mapper applies a user-defined map operation.
-The map operation produces intermediate (key, value) pairs which are the results of the map operations.  
+The map operation produces an intermediate (key, value) pairs which are the results of the map operations, these results are written and saved to the file system.  
 \par
 The reducer is again a user defined operation that processes the intermediate values from the mapper grouped by key.  The reducer can produce zero or an aggregate of all values
 that map to the same key.
@@ -135,22 +140,104 @@ There are two very popular frameworks that implement the map reduce concept, the
 This paper will focus on Hadoop instead of Google Map Reduce since the complete details of Google Map Reduce and relatively unknown, however both frameworks function similarly.
 \par
 Hadoop consist of three layers:
+\  \\
 \begin{enumerate}
+	\setlength\itemsep{1em}
 	\item Application layer
 	\item Map Reduce layer
 	\item HDFS layer
 \end{enumerate} 
+\  \\
+The HDFS layer is Hadoop's storage layer.  The HDFS structures data in blocks that is managed by a master node, when the map reduce runs, the master node will assign each individual mapper data chunks as broken down by the HDFS.  More importantly, the HDFS layer has the is one major component Hadoop Map Reduce's mechanism for
+fault tolerance.  The application layer sits on top of the map reduce layer.  The application layer consists of several additions to the standard map reduce framework, these include high level languages, database adaptations.  These application layer additions will be discussed later on in this survey paper.
 
 
+\subsection{Parallel and Distributed Computation}
 
+The main advantage of the map reduce concept is that there are no dependency between mappers or mappers.  Map reduce therefore is extremely scalable, adding additional nodes either through adding additional cores or compute nodes is a relatively simple task.  This design is very similar to that of the share nothing architecture found in parallel DBMS systems.
 
 \subsection{Fault Tolerance}
 
+Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a map reduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.
+
+
+\section{DBMS vs Map Reduce}
+Map reduce and distributed DBMS systems are very similar in that both are parallel data processing frameworks, both support roughly the same feature sets, performance, fault tolerance, user-combustibility.  However, map reduce is far more flexible,  where  as DBMS require data to be organized into schema map reduce can be applied to any variety of data set.  This flexibility is not without its trade-offs though, in general is found to be ~15 - 20 percent slower than that of map reduce in a variety of general tasks \cite{pavlo2009comparison}.  This section will cover the differences between the two and present a performance study between the two.
+
+\subsection{Map Reduce Advantages}
+
+\begin {enumerate}
+	\setlength\itemsep{1em}
+	\item 
+	
+	\textbf{Simplicity in Framework}
+	
+	Programming map reduce is easier to use than query languages such as SQL for two reasons.  Firstly, there are no complex language constructs as is the case with SQL, and secondly, the programmer does not need to understand a table's schema and data layout.
+	\item 
+	
+	\textbf{Flexibility}
+	
+	The lack of schema's allow data to be organized in any fashion.  The programmer does not need to massage the input data into a rigid format.
+	
+	\item 
+	
+	\textbf{Storage Agnostic}
+	
+	Since there are no set schema's, data can easily be moved from one storage framework (representation) to another.  There is very little needed to re-run the same map/reduce job.  
+	For DBMS systems, there would have to be a translation job between two different storage frameworks to ensure that the integrity of the data is kept constant.
+	
+\end {enumerate}
+
+\subsection{Map Reduce Disadvantages}
+
+
+\begin {enumerate}
+\setlength\itemsep{1em}
+\item 
+
+\textbf{Lack of High Level Language}
+
+While map reduce is extremely to program due to the simplistic nature of the logical map and reduce function, the lack of a high level language means that there is very little in terms of portability when multiple map reduce stages are chained together.   Take for example, a very common query in SQL, select * from table where column 1 > value 1 and column 2 > value 2.  In map reduce, there would be two stages, the first stage
+would filter by column 1 and the second column 2.  The programmer would need to know to pass data from column 1 in first, then pass in data from column 2.  The programmer cannot pass in an entire row with multiple columns because map reduce only supports single (key,value ) pairs.
+In this regards, map reduce has often being compared with assembly programming, it is difficult to re-use a preexisting map reduce stage without knowing entirely the execution flow for it.  
+\item 
+
+\textbf{Rigid Data Flow}
+
+Map reduce runs in two discrete steps, the reduce step does not start until all the mapper steps have completed.  Since map reduce is a distributed system running on any kind of network, the possibility that there is a single straggler node is entirely not out of the ordinary.  In this situation, all compute nodes would have to wait on the straggler node.  DBMS systems do not have this constraint, using the Schema and query logic, the scheduler will schedule as many local reduces as possible from free compute nodes, this results faster execution times \cite{yang2007map}.
+
+\item 
+
+\textbf{Lack of Schema or Indexes}
+
+One of map reduce's biggest advantages, flexibility is also one of its largest disadvantages.  While not having a schema means that map reduce jobs have very fast initiation times,  on the other searching operations  are considerable slower.  A lack of schema also means that between multiple map reduce stages, data has to be parsed again and again.  In addition, the lack of a schema means that compile time optimizations cannot be made, only runtime optimizations as well, reductions in logic between multiple map reduce stages.
+
+\end {enumerate}
+
+
+\subsection{Difference in Programming Model}
+%% -> I think this section should be moved into the high level language section
+Map reduce and DBMS represent an old discussion on two different views in methods to access data \cite{pavlo2009comparison}.  These are:
+\  \\
+\begin{enumerate}
+	\setlength\itemsep{1em}
+	\item Relational view, state what you want rather than presenting an algorithm; this represents map reduce.
+	\item Codasyl, an algorithm for data access; this represents query languages such as SQL.
+\end{enumerate} 
+\  \\
+At the time, it was concluded that relational are easier to understand and modify with Codasyl being criticized for being "too assembly similar to assembly".  
+
+\section{Map Reduce versus DBMS Performance}
+
+Hadoop Map Reduce and Parallel DBMS systems compared in performance for two category of tasks.  The first, more read heavy and the second more computation heavy.  
 
 
 
+\subsection{System Configurations}
+Both map reduce and DBMS systems were deployed on a 100 node cluster.  Each node has a single 2.40 GHz Intel Core 2 Duo with 4GB of ram and two 250GB SATA-I hard disks.  All 100 nodes were connected using two gigabyte 128 Gbps Ethernet switch with 50 nodes per switch.
 
-Analgous to parallel DBMS, the map and reduce step are very similar to a filter and reduce.
+\subsection{}
+
 
 
 
