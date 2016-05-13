@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 MAY 2016 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 MAY 2016 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -373,33 +373,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 152--154
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 180--181
+Underfull \hbox (badness 10000) in paragraph at lines 171--173
 
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 191.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 177.
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
 [3 <./images/mapReduce.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 238--240
+Underfull \hbox (badness 10000) in paragraph at lines 252--254
 
  []
 
 [4]
-Underfull \hbox (badness 1270) in paragraph at lines 266--267
+Underfull \hbox (badness 1270) in paragraph at lines 280--281
 []\T1/ptm/m/n/10 Again, Hadoop is con-sid-er-ably slower than DBMS-x
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 273.
+(Font)              <7> on input line 287.
 
-Overfull \hbox (28.74397pt too wide) in paragraph at lines 283--283
+Overfull \hbox (28.74397pt too wide) in paragraph at lines 297--297
 []\T1/ptm/m/n/10 Hadoop/DBMS- 
  []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -408,10 +411,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: images/mapReduceJoin.png Graphic file (type png)
 
 <use images/mapReduceJoin.png>
-Package pdftex.def Info: images/mapReduceJoin.png used on input line 337.
+Package pdftex.def Info: images/mapReduceJoin.png used on input line 351.
 (pdftex.def)             Requested size: 299.91975pt x 298.11302pt.
 
-Overfull \hbox (56.4213pt too wide) in paragraph at lines 337--338
+Overfull \hbox (56.4213pt too wide) in paragraph at lines 351--352
  [][] 
  []
 
@@ -419,12 +422,9 @@ Overfull \hbox (56.4213pt too wide) in paragraph at lines 337--338
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 345.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 359.
 [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (13.4291pt too wide) in paragraph at lines 390--391
+Overfull \hbox (13.4291pt too wide) in paragraph at lines 404--405
 []\T1/ptm/m/n/10 Pregel im-ple-ments the Bulk Syn-chronous Par-al-lel mode(BSP)
 ,
  []
@@ -434,17 +434,20 @@ Overfull \hbox (13.4291pt too wide) in paragraph at lines 390--391
 File: images/logicalRegression.png Graphic file (type png)
 
 <use images/logicalRegression.png>
-Package pdftex.def Info: images/logicalRegression.png used on input line 402.
+Package pdftex.def Info: images/logicalRegression.png used on input line 416.
 (pdftex.def)             Requested size: 240.90186pt x 158.99521pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 <images/sparkPerformance.png, id=35, 608.2725pt x 269.005pt>
 File: images/sparkPerformance.png Graphic file (type png)
 
 <use images/sparkPerformance.png>
-Package pdftex.def Info: images/sparkPerformance.png used on input line 411.
+Package pdftex.def Info: images/sparkPerformance.png used on input line 425.
 (pdftex.def)             Requested size: 364.96632pt x 161.40424pt.
 
-Overfull \hbox (121.46786pt too wide) in paragraph at lines 411--412
+Overfull \hbox (121.46786pt too wide) in paragraph at lines 425--426
  [][] 
  []
 
@@ -452,10 +455,10 @@ Overfull \hbox (121.46786pt too wide) in paragraph at lines 411--412
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Citation `bibid' on page 7 undefined on input line 421.
+LaTeX Warning: Citation `bibid' on page 7 undefined on input line 435.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--433
+Underfull \hbox (badness 10000) in paragraph at lines 445--447
 
  []
 
@@ -464,14 +467,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 431--433
 File: images/raftBenchmark.png Graphic file (type png)
 
 <use images/raftBenchmark.png>
-Package pdftex.def Info: images/raftBenchmark.png used on input line 464.
+Package pdftex.def Info: images/raftBenchmark.png used on input line 478.
 (pdftex.def)             Requested size: 230.06126pt x 176.4606pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 2334) in paragraph at lines 473--474
+Underfull \hbox (badness 2334) in paragraph at lines 487--488
 []\T1/ptm/m/n/10 This tech-nique of par-ti-tion-ing data into in-de-pen-dent
  []
 
@@ -515,12 +518,12 @@ Underfull \hbox (badness 10000) detected at line 50
 \T1/ptm/m/n/8 [8]
  []
 
-
+[8 <./images/raftBenchmark.png>]
 Underfull \hbox (badness 10000) detected at line 57
 \T1/ptm/m/n/8 [9]
  []
 
-[8 <./images/raftBenchmark.png>]
+
 Underfull \hbox (badness 1226) in paragraph at lines 85--89
 []\T1/ptm/m/n/8 Matei Za-haria, Mosharaf Chowd-hury, Michael J Franklin, Scott
  []
@@ -535,11 +538,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  4436 strings out of 493089
  62344 string characters out of 6134842
- 141266 words of memory out of 5000000
+ 137266 words of memory out of 5000000
  7807 multiletter control sequences out of 15000+600000
  72481 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,1323b,1065s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,15n,58p,1323b,1614s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -547,7 +550,7 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (9 pages, 367634 bytes).
+Output written on main.pdf (9 pages, 368326 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream

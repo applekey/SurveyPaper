@@ -169,13 +169,27 @@ The main advantage of the map reduce concept is that there are no dependency bet
 \subsection{Fault Tolerance}
 
 Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a map reduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.  Hadoop Map Reduce's failure's can be categorized into three categories.
-
-\  \\
+\ \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
-	\item Task Failure
-	\item Worker Failure
-	\item Master Failure
+	\item 
+	
+	\textbf{Task Failure}
+	
+	Task failures occur either on the mapper or reducer.  These failures can occur from (1) malformed input data, (2) contention of shared resources such as file servers or network switches.
+	When a task failure occurs, workers mark the running task as a failure and notify the master scheduler.  The master scheduler will restart the same task on the same node twice before either skipping the bad data section, or restarting the whole computation.
+	\item 
+	
+	\textbf{Worker Failure}
+	
+	Worker failures happen when the worker stops responding to the master node.  Worker failures can occur from (1) hardware failures such as a broken hard disk or (2) network switch failures such that the worker node cannot be contacted.
+	
+	
+	\item 
+	
+	\textbf{Master Failure}
+	
+	Hadoop's master node is usually duplicated by multiple instances.  Since this is a single point of failure and easily detectable, when the master node fails, the responsibility is simply given to any secondary duplicated instance.
 \end{enumerate}
 \ \\
 
@@ -422,8 +436,8 @@ Hadoop has an extremely naive algorithm in order to handle failed nodes.   When 
 
 \subsection{Faulty Facebook Example}
 
-Facebook typically load about 10 TB of compressed data per day.  Suppose that given 100 workers with each capable of performing two mappings concurently.  Using input splits of 256 MB,  a workload of 10 TB will require ~400 mapper invokes.  Also, lets suppose that each mapper takes 17 seconds to run, so in total 400 mappers will take ~520 seconds.  
-\par
+%Facebook typically load about 10 TB of compressed data per day.  Suppose that given 100 workers with each capable of performing two mappings concurently.  Using input splits of 256 MB,  a workload of 10 TB will require ~400 mapper invokes.  Also, lets suppose that each mapper takes 17 seconds to run, so in total 400 mappers will take ~520 seconds.  
+%\par
 Since failures are very common in Map Reduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occured.
 
 \subsection{Local Checkpoints}
