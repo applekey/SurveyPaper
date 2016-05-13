@@ -40,7 +40,7 @@ University of Oregon\\
 
 \begin{abstract}
 	
-	fdsa
+	This survey paper is intended to compare traditional distributed DBMS systems with newer Map Reduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will then cover the additional research that has being released in order to address these failures.
 \end{abstract}
 
 \section{Introduction}
@@ -396,17 +396,17 @@ A benchmark Spark program that measured the time it takes to complete a logical 
 	\label{fig:logicalRegression}
 \end{figure}
 
-This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 cores each.  From the result, figure \ref{fig: sparkPerformance}.
+This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 cores each.  From the result, figure \ref{fig:sparkPerformance},  there is a clear trend, Hadoop's running time scales almost linearly with number of iterations, while Spark remains constant.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/sparkPerformance.png}
+	\includegraphics[scale=0.6]{images/sparkPerformance.png}
 	\caption{Logical regression performance between Spark and Hadoop  \protect\cite{zaharia2010spark}.}
 	\label{fig:sparkPerformance}
 \end{figure}
 
-
-
+\subsubsection{Application Level Frameworks}
+Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational querry language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
 
 
 
