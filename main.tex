@@ -38,6 +38,11 @@ University of Oregon\\
 }
 \maketitle
 
+\begin{abstract}
+	
+	fdsa
+\end{abstract}
+
 \section{Introduction}
 The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more precisely, in 2003, 6.8 exabytes were being created every 2 days,\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
 \par
@@ -361,7 +366,7 @@ XML, JSON, Apache's Thrift, or other formats can be modified in order to very ba
 
 \subsection{Optimized Data Flow}
 
-Due to the rigid execution model of map reduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops.  Take for example a simple program, program \ref{loopCode} that invokes map reduce over a number of iterations.
+Due to the rigid execution model of map reduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops. Loops are very common in machine learning algorithms that apply a function repeatably tot he same input, optimizing a single parameter at a time. Take for example a simple program, program \ref{loopCode} that invokes map reduce over a number of iterations.
 
 \begin{lstlisting} [label=loopCode]
 1. for(int i = 0: i < 10; i++)
@@ -370,11 +375,35 @@ Due to the rigid execution model of map reduce, sequential programs that incorpo
 4. }
 \end{lstlisting}
 
-For each iteration of the loop, the map reduce program would have to read in the program's initialization data and output the iteration's results.  Even though perhaps only one variable has changed in the data, the entire dataset has to be read in, in its entirety.  To solve this problem, there have being several frameworks designed to identify loop invariant data to avoid loading and unloading unnecessary.   These are, HaLoop \cite{bu2010haloop}, Twister \cite{ekanayake2010twister} and Pregel \cite{malewicz2010pregel}. 
+For each iteration of the loop, the map reduce program would have to read in the program's initialization data and output the iteration's results.  Even though perhaps only one variable has changed in the data, the entire dataset has to be read in, in its entirety.  To solve this problem, there have being several frameworks designed to identify loop invariant data to avoid loading and unloading unnecessary.   These are, HaLoop \cite{bu2010haloop}, Twister \cite{ekanayake2010twister},  Pregel \cite{malewicz2010pregel} and Apache Spark\cite{zaharia2010spark}. 
+\par
+Both HaLoop and Twister work very similar to each other.  These frameworks first identify invariant data between iterations, maintain them in memory.  Twister accomplishes this by re-using previously instantiated workers with modified inputs between iterations.  HaLoop takes this idea further by also caching input and output data per stage.
+\par
+Pregel implements the Bulk Synchronous Parallel mode(BSP), in which each node owns its own input and output.  BSP assumes that access to each node's own memory is fast and remote memory access is much slower.  In this model, only the essential data is transfered between nodes through a communication and sync step.  
+
+\subsubsection{Apache Spark}
+Apache Spark is a twist on the original map reduce framework.  It is intended to map reduce's repetitive data loading from either loops or joins.  Instead Spark tries to keep everything in memory.   One of the reason map reduce has such a rigid flow, with barriers between the map and reduce stage, where input, intermediate and output data is written to disk is that map reduce has a very simplistic fault tolerance mechanisms.  Spark instead takes on a more DBMS approach of categorizing data into read only objects called resilient distributed data sets(RDD).  This allows spark to be more flexibility with what needs to be duplicated onto disk in order to ensure fault tolerance.  In addition, Spark's language supports the ability for programmers to explicitly control the size and lifetime of RDD's.  This gives the programmer a very big tuning knob in order to get the best performance  from their programs. More relaxed RDD failure schemes give better performance since most data is in memory, but worse failure recovery time, and more strict RDD failure schemes give the best performance for highly faulty systems.  Spark represents perhaps the most drastic over haul of the original map reduce framework in order to deal with invariant data, and the performance demonstrates the effectiveness of RDD's.
 
 
+\subsubsection{Apache Spark Performance}
 
+A benchmark Spark program that measured the time it takes to complete a logical regression of a dataset was benchmarked versus Hadoop.  The program iteratively attempts to find a hyperplane $w$ that best separates two sets of points, figure \ref{fig:logicalRegression} gives a 2D example.   The logical regression accomplishes this through a gradient descent method, starting at a random $w$ and over n iterations moves closer to the true $w$ through finding the gradient.  This test benefits greatly from caching input data (the points) since it does not change each iteration.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{images/logicalRegression.png}
+	\caption{Finding the optimal hyperplane between a dataset of points.}
+	\label{fig:logicalRegression}
+\end{figure}
+
+This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 cores each.  From the result, figure \ref{fig: sparkPerformance}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/sparkPerformance.png}
+	\caption{Logical regression performance between Spark and Hadoop  \protect\cite{zaharia2010spark}.}
+	\label{fig:sparkPerformance}
+\end{figure}
 
 
 

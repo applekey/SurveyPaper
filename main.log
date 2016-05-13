@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 15:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 18:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -311,8 +311,16 @@ e
 ))
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 39.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 41.
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--60
+Underfull \hbox (badness 10000) in paragraph at lines 63--65
 
  []
 
@@ -320,10 +328,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--60
 File: images/parallelComputation.png Graphic file (type png)
 
 <use images/parallelComputation.png>
-Package pdftex.def Info: images/parallelComputation.png used on input line 80.
+Package pdftex.def Info: images/parallelComputation.png used on input line 85.
 (pdftex.def)             Requested size: 246.7914pt x 167.17738pt.
 
-Overfull \hbox (3.29294pt too wide) in paragraph at lines 80--81
+Overfull \hbox (3.29294pt too wide) in paragraph at lines 85--86
  [][] 
  []
 
@@ -338,10 +346,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: images/parDBMS.png Graphic file (type png)
 
 <use images/parDBMS.png>
-Package pdftex.def Info: images/parDBMS.png used on input line 99.
+Package pdftex.def Info: images/parDBMS.png used on input line 104.
 (pdftex.def)             Requested size: 140.0773pt x 140.0773pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--111
+Underfull \hbox (badness 10000) in paragraph at lines 113--116
 
  []
 
@@ -349,10 +357,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--111
 File: images/mapReduce.png Graphic file (type png)
 
 <use images/mapReduce.png>
-Package pdftex.def Info: images/mapReduce.png used on input line 138.
+Package pdftex.def Info: images/mapReduce.png used on input line 143.
 (pdftex.def)             Requested size: 247.04234pt x 168.75003pt.
 
-Overfull \hbox (3.54388pt too wide) in paragraph at lines 138--139
+Overfull \hbox (3.54388pt too wide) in paragraph at lines 143--144
  [][] 
  []
 
@@ -360,29 +368,27 @@ Overfull \hbox (3.54388pt too wide) in paragraph at lines 138--139
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2 <./images/parallelComputation.png> <./images/parDBMS.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 147--149
+Underfull \hbox (badness 10000) in paragraph at lines 152--154
 
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 178.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 183.
 [3 <./images/mapReduce.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 225--227
+Underfull \hbox (badness 10000) in paragraph at lines 230--232
 
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 253--254
+Underfull \hbox (badness 1270) in paragraph at lines 258--259
 []\T1/ptm/m/n/10 Again, Hadoop is con-sid-er-ably slower than DBMS-x
  []
 
 [4]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 260.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 260.
+(Font)              <7> on input line 265.
 
-Overfull \hbox (28.74397pt too wide) in paragraph at lines 270--270
+Overfull \hbox (28.74397pt too wide) in paragraph at lines 275--275
 []\T1/ptm/m/n/10 Hadoop/DBMS- 
  []
 
@@ -390,16 +396,48 @@ Overfull \hbox (28.74397pt too wide) in paragraph at lines 270--270
 File: images/mapReduceJoin.png Graphic file (type png)
 
 <use images/mapReduceJoin.png>
-Package pdftex.def Info: images/mapReduceJoin.png used on input line 324.
+Package pdftex.def Info: images/mapReduceJoin.png used on input line 329.
 (pdftex.def)             Requested size: 299.91975pt x 298.11302pt.
 
-Overfull \hbox (56.4213pt too wide) in paragraph at lines 324--325
+Overfull \hbox (56.4213pt too wide) in paragraph at lines 329--330
  [][] 
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 332.
-[5 <./images/mapReduceJoin.png>] (./main.bbl
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 337.
+[5 <./images/mapReduceJoin.png>]
+Overfull \hbox (13.4291pt too wide) in paragraph at lines 382--383
+[]\T1/ptm/m/n/10 Pregel im-ple-ments the Bulk Syn-chronous Par-al-lel mode(BSP)
+,
+ []
+
+
+Underfull \vbox (badness 1122) has occurred while \output is active []
+
+ [6]
+<images/logicalRegression.png, id=34, 803.0pt x 529.98pt>
+File: images/logicalRegression.png Graphic file (type png)
+
+<use images/logicalRegression.png>
+Package pdftex.def Info: images/logicalRegression.png used on input line 394.
+(pdftex.def)             Requested size: 240.90186pt x 158.99521pt.
+
+
+LaTeX Warning: Reference `fig: sparkPerformance' on page 7 undefined on input l
+ine 399.
+
+<images/sparkPerformance.png, id=35, 608.2725pt x 269.005pt>
+File: images/sparkPerformance.png Graphic file (type png)
+
+<use images/sparkPerformance.png>
+Package pdftex.def Info: images/sparkPerformance.png used on input line 403.
+(pdftex.def)             Requested size: 304.13551pt x 134.50217pt.
+
+Overfull \hbox (60.63705pt too wide) in paragraph at lines 403--404
+ [][] 
+ []
+
+(./main.bbl
 Underfull \hbox (badness 10000) detected at line 3
 \T1/ptm/m/n/8 [1]
  []
@@ -444,19 +482,28 @@ Underfull \hbox (badness 10000) detected at line 57
 \T1/ptm/m/n/8 [9]
  []
 
-) [6] (./main.aux)
+
+Underfull \hbox (badness 1226) in paragraph at lines 85--89
+[]\T1/ptm/m/n/8 Matei Za-haria, Mosharaf Chowd-hury, Michael J Franklin, Scott
+ []
+
+) [7 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
+(./main.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4377 strings out of 493089
- 61319 string characters out of 6134842
- 136211 words of memory out of 5000000
- 7754 multiletter control sequences out of 15000+600000
- 66466 words of font info for 112 fonts, out of 8000000 for 9000
+ 4409 strings out of 493089
+ 61927 string characters out of 6134842
+ 136231 words of memory out of 5000000
+ 7781 multiletter control sequences out of 15000+600000
+ 72481 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,914b,1610s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,15n,58p,1323b,1610s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -464,10 +511,10 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (6 pages, 291727 bytes).
+Output written on main.pdf (7 pages, 325726 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 64 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

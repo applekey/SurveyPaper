@@ -81,4 +81,10 @@ Grzegorz Malewicz, Matthew~H Austern, Aart~JC Bik, James~C Dehnert, Ilan Horn,
 \newblock in {\em Proceedings of the 2010 ACM SIGMOD International Conference
   on Management of data}. ACM, 2010, pp. 135--146.
 
+\bibitem{zaharia2010spark}
+Matei Zaharia, Mosharaf Chowdhury, Michael~J Franklin, Scott Shenker, and Ion
+  Stoica,
+\newblock ``Spark: Cluster computing with working sets.,''
+\newblock {\em HotCloud}, vol. 10, pp. 10--10, 2010.
+
 \end{thebibliography}
