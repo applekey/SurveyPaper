@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 19:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 MAY 2016 10:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -372,37 +372,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 152--154
 
  []
 
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 183.
-[3 <./images/mapReduce.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 230--232
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 258--259
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
+
+ []
+
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 191.
+[3 <./images/mapReduce.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 238--240
+
+ []
+
+[4]
+Underfull \hbox (badness 1270) in paragraph at lines 266--267
 []\T1/ptm/m/n/10 Again, Hadoop is con-sid-er-ably slower than DBMS-x
  []
 
-
-Underfull \vbox (badness 3199) has occurred while \output is active []
-
- [4]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 265.
+(Font)              <7> on input line 273.
 
-Overfull \hbox (28.74397pt too wide) in paragraph at lines 275--275
+Overfull \hbox (28.74397pt too wide) in paragraph at lines 283--283
 []\T1/ptm/m/n/10 Hadoop/DBMS- 
  []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <images/mapReduceJoin.png, id=24, 599.841pt x 596.2275pt>
 File: images/mapReduceJoin.png Graphic file (type png)
 
 <use images/mapReduceJoin.png>
-Package pdftex.def Info: images/mapReduceJoin.png used on input line 329.
+Package pdftex.def Info: images/mapReduceJoin.png used on input line 337.
 (pdftex.def)             Requested size: 299.91975pt x 298.11302pt.
 
-Overfull \hbox (56.4213pt too wide) in paragraph at lines 329--330
+Overfull \hbox (56.4213pt too wide) in paragraph at lines 337--338
  [][] 
  []
 
@@ -410,9 +419,12 @@ Overfull \hbox (56.4213pt too wide) in paragraph at lines 329--330
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 337.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 345.
 [5]
-Overfull \hbox (13.4291pt too wide) in paragraph at lines 382--383
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (13.4291pt too wide) in paragraph at lines 390--391
 []\T1/ptm/m/n/10 Pregel im-ple-ments the Bulk Syn-chronous Par-al-lel mode(BSP)
 ,
  []
@@ -422,17 +434,17 @@ Overfull \hbox (13.4291pt too wide) in paragraph at lines 382--383
 File: images/logicalRegression.png Graphic file (type png)
 
 <use images/logicalRegression.png>
-Package pdftex.def Info: images/logicalRegression.png used on input line 394.
+Package pdftex.def Info: images/logicalRegression.png used on input line 402.
 (pdftex.def)             Requested size: 240.90186pt x 158.99521pt.
 
 <images/sparkPerformance.png, id=35, 608.2725pt x 269.005pt>
 File: images/sparkPerformance.png Graphic file (type png)
 
 <use images/sparkPerformance.png>
-Package pdftex.def Info: images/sparkPerformance.png used on input line 403.
+Package pdftex.def Info: images/sparkPerformance.png used on input line 411.
 (pdftex.def)             Requested size: 364.96632pt x 161.40424pt.
 
-Overfull \hbox (121.46786pt too wide) in paragraph at lines 403--404
+Overfull \hbox (121.46786pt too wide) in paragraph at lines 411--412
  [][] 
  []
 
@@ -440,17 +452,23 @@ Overfull \hbox (121.46786pt too wide) in paragraph at lines 403--404
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Citation `bibid' on page 7 undefined on input line 413.
+LaTeX Warning: Citation `bibid' on page 7 undefined on input line 421.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 423--425
+Underfull \hbox (badness 10000) in paragraph at lines 431--433
 
  []
 
 [7 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 431--432
+<images/raftBenchmark.png, id=42, 383.4325pt x 294.09875pt>
+File: images/raftBenchmark.png Graphic file (type png)
 
- []
+<use images/raftBenchmark.png>
+Package pdftex.def Info: images/raftBenchmark.png used on input line 466.
+(pdftex.def)             Requested size: 230.06126pt x 176.4606pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 (./main.bbl
 Underfull \hbox (badness 10000) detected at line 3
@@ -502,18 +520,16 @@ Underfull \hbox (badness 1226) in paragraph at lines 85--89
 []\T1/ptm/m/n/8 Matei Za-haria, Mosharaf Chowd-hury, Michael J Franklin, Scott
  []
 
-) [8
-
-] (./main.aux)
+) [8 <./images/raftBenchmark.png>] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4410 strings out of 493089
- 61927 string characters out of 6134842
- 141235 words of memory out of 5000000
- 7782 multiletter control sequences out of 15000+600000
+ 4434 strings out of 493089
+ 62290 string characters out of 6134842
+ 141258 words of memory out of 5000000
+ 7805 multiletter control sequences out of 15000+600000
  72481 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,15n,58p,1323b,1065s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -524,10 +540,10 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (8 pages, 330503 bytes).
+Output written on main.pdf (8 pages, 365727 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 69 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: IEEE.bst
 Database file #1: citations.bib
 Warning--I didn't find a database entry for "bibid"
-You've used 14 entries,
+You've used 15 entries,
             1838 wiz_defined-function locations,
-            533 strings with 6756 characters,
-and the built_in function-call counts, 4658 in all, are:
-= -- 437
-> -- 229
-< -- 7
-+ -- 81
-- -- 67
-* -- 364
-:= -- 693
-add.period$ -- 21
-call.type$ -- 14
-change.case$ -- 14
+            539 strings with 6983 characters,
+and the built_in function-call counts, 5057 in all, are:
+= -- 478
+> -- 243
+< -- 8
++ -- 86
+- -- 71
+* -- 390
+:= -- 745
+add.period$ -- 23
+call.type$ -- 15
+change.case$ -- 15
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 203
-empty$ -- 414
-format.name$ -- 67
-if$ -- 1075
+cite$ -- 15
+duplicate$ -- 224
+empty$ -- 452
+format.name$ -- 71
+if$ -- 1174
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 14
-newline$ -- 73
-num.names$ -- 14
-pop$ -- 51
+int.to.str$ -- 15
+missing$ -- 15
+newline$ -- 78
+num.names$ -- 15
+pop$ -- 57
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 116
+skip$ -- 130
 stack$ -- 0
-substring$ -- 360
-swap$ -- 86
-text.length$ -- 7
+substring$ -- 392
+swap$ -- 97
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 45
-width$ -- 16
-write$ -- 161
+while$ -- 49
+width$ -- 17
+write$ -- 173
 (There was 1 warning)

@@ -168,8 +168,16 @@ The main advantage of the map reduce concept is that there are no dependency bet
 
 \subsection{Fault Tolerance}
 
-Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a map reduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.
+Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a map reduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.  Hadoop Map Reduce's failure's can be categorized into three categories.
 
+\  \\
+\begin{enumerate}
+	\setlength\itemsep{1em}
+	\item Task Failure
+	\item Worker Failure
+	\item Master Failure
+\end{enumerate}
+\ \\
 
 \section{DBMS vs Map Reduce}
 Map reduce and distributed DBMS systems are very similar in that both are parallel data processing frameworks, both support roughly the same feature sets, performance, fault tolerance, user-combustibility.  However, map reduce is far more flexible,  where  as DBMS require data to be organized into schema map reduce can be applied to any variety of data set.  This flexibility is not without its trade-offs though, in general is found to be ~15 - 20 percent slower than that of map reduce in a variety of general tasks \cite{pavlo2009comparison}.  This section will cover the differences between the two and present a performance study between the two.
@@ -428,13 +436,37 @@ Like DBMS, map reduce would benefit from local checkpoints so that in the case o
 	\item Additional communication needs to be relayed intra compute nodes in order to make aware of the additional checkpoints.
 	\item Recovering from failure requires fetching checkpoint from intermediate storage, which may or may not involve additional network bandwidth.
 \end{enumerate}
-\  \\
+
+\subsection{Checkpoint - Rafts}
+
+The Raft recovery algorithm attempts to solve the above three issues by adopting a hybrid approach in between map reduces naive implementation and the previous work.  Raft provides three features,
+
+\begin{enumerate}
+	\item Local checkpoints, these deal with local task failures are have a very quick recovery scheme.
+	\item Remote checkpoints, these checkpoints are written to a share file system, these happen when a node failures either from network/hardware or OS failures.
+	\item Query Meta-data, when a node fails, a restarting node will use this meta data to determine the most optimal restart point.
+\end{enumerate}
+
+
+\subsection{Performance Benchmark}
+A simple aggregation task, listing \ref{raftAggregation} was performed.  This task was chosen because the group by a considerable amount of intermediate results.  The data set UserVisits consists of 50 GB, about 900 M (key, value) tuples.
+\par
+Figure \ref{fig:raftPerformance} demonstrates that as the number of bad records per split increases, Raft check pointing is a much more efficient failure mechanism resulting in lower total execution times. 
+
+\begin{lstlisting} [label=raftAggregation]
+SELECT sourceIP, SUM(adRevenue)
+FROM UserVisits
+GROUP BY sourceIP;
+\end{lstlisting}
 
 
 
-
-
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/raftBenchmark.png}
+	\caption{ RAFT-LC results \protect\cite{quiane2011rafting}.}
+	\label{fig:raftPerformance}
+\end{figure}
 
 
 

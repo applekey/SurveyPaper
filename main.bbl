@@ -94,4 +94,10 @@ Christopher Yang, Christine Yen, Ceryen Tan, and Samuel~R Madden,
 \newblock in {\em Data Engineering (ICDE), 2010 IEEE 26th International
   Conference on}. IEEE, 2010, pp. 657--668.
 
+\bibitem{quiane2011rafting}
+Jorge-Arnulfo Quiane-Ruiz, Christoph Pinkel, J{\"o}rg Schad, and Jens Dittrich,
+\newblock ``Rafting mapreduce: Fast recovery on the raft,''
+\newblock in {\em Data Engineering (ICDE), 2011 IEEE 27th International
+  Conference on}. IEEE, 2011, pp. 589--600.
+
 \end{thebibliography}
