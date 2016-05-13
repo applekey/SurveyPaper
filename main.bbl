@@ -100,4 +100,14 @@ Jorge-Arnulfo Quiane-Ruiz, Christoph Pinkel, J{\"o}rg Schad, and Jens Dittrich,
 \newblock in {\em Data Engineering (ICDE), 2011 IEEE 27th International
   Conference on}. IEEE, 2011, pp. 589--600.
 
+\bibitem{kitsuregawa1983application}
+Masaru Kitsuregawa, Hidehiko Tanaka, and Tohru Moto-Oka,
+\newblock ``Application of hash to data base machine and its architecture,''
+\newblock {\em New Generation Computing}, vol. 1, no. 1, pp. 63--74, 1983.
+
+\bibitem{dewitt1985multiprocessor}
+David~J DeWitt and Robert Gerber,
+\newblock {\em Multiprocessor hash-based join algorithms},
+\newblock University of Wisconsin-Madison, Computer Sciences Department, 1985.
+
 \end{thebibliography}

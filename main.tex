@@ -459,8 +459,6 @@ FROM UserVisits
 GROUP BY sourceIP;
 \end{lstlisting}
 
-
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{images/raftBenchmark.png}
@@ -468,6 +466,13 @@ GROUP BY sourceIP;
 	\label{fig:raftPerformance}
 \end{figure}
 
+\section{Origins of Map Reduce Concept}
+
+The ideas of map and reduce are not entirely novel.  The strategy of partitioning  data sets into smaller concurrent pieces has being around for the last 20 years.  It was first proposed in the article, Application of Hash to Data Base Machine and Its Architecture \cite{kitsuregawa1983application}.   In a following article, "Multiprocessor Hash-Based Join Algorithms"\cite{dewitt1985multiprocessor}, Gerber describes how partitioning scheme can be extended in parallel to handle joins on a shared- nothing architecture. 
+\par
+This technique of partitioning data into independent chunks, shared-nothing architectures as well as using memory to speed up computation has being used and refined in commercial DBMS systems since the 1980's.
+\par
+Map reduce advocates might argue that the move away from a relational SQL like language is what differentiates map reduce from DBMS systems of yesterday, but POSTGRES systems included support for user-defined  mappers and aggregates  since the mid 1980's.  DBMS systems are not usually associated with the Codasyl method because the Database community as a whole decided that the relational view was easier to understand logically and more portable.  
 
 
 
