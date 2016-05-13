@@ -87,4 +87,11 @@ Matei Zaharia, Mosharaf Chowdhury, Michael~J Franklin, Scott Shenker, and Ion
 \newblock ``Spark: Cluster computing with working sets.,''
 \newblock {\em HotCloud}, vol. 10, pp. 10--10, 2010.
 
+\bibitem{yang2010osprey}
+Christopher Yang, Christine Yen, Ceryen Tan, and Samuel~R Madden,
+\newblock ``Osprey: Implementing mapreduce-style fault tolerance in a
+  shared-nothing distributed database,''
+\newblock in {\em Data Engineering (ICDE), 2010 IEEE 26th International
+  Conference on}. IEEE, 2010, pp. 657--668.
+
 \end{thebibliography}

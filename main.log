@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 18:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -439,6 +439,19 @@ Overfull \hbox (121.46786pt too wide) in paragraph at lines 403--404
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Citation `bibid' on page 7 undefined on input line 413.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 423--425
+
+ []
+
+[7 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 431--432
+
+ []
+
 (./main.bbl
 Underfull \hbox (badness 10000) detected at line 3
 \T1/ptm/m/n/8 [1]
@@ -489,17 +502,18 @@ Underfull \hbox (badness 1226) in paragraph at lines 85--89
 []\T1/ptm/m/n/8 Matei Za-haria, Mosharaf Chowd-hury, Michael J Franklin, Scott
  []
 
-) [7 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
-(./main.aux)
+) [8
+
+] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4408 strings out of 493089
- 61904 string characters out of 6134842
- 141231 words of memory out of 5000000
- 7780 multiletter control sequences out of 15000+600000
+ 4410 strings out of 493089
+ 61927 string characters out of 6134842
+ 141235 words of memory out of 5000000
+ 7782 multiletter control sequences out of 15000+600000
  72481 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,15n,58p,1323b,1065s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -510,10 +524,10 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (7 pages, 326593 bytes).
+Output written on main.pdf (8 pages, 330503 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 67 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

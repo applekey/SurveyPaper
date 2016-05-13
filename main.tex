@@ -408,6 +408,27 @@ This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 c
 \subsubsection{Application Level Frameworks}
 Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational querry language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
 
+\section{Map Reduce Fault Tolerance}
+
+Hadoop has an extremely naive algorithm in order to handle failed nodes.   When the master scheduler detects that a node has failed, it will simply restart that node in its entirety.  Since Hadoop was built with fault tolerance as a first class citizen, failures in nodes are not abnormalities, large Hadoop clusters often experience a multitude of  failures over the course of a day  \cite{bibid}.  Lets take a practical example from Facebook to motivate why Hadoop's naive restart algorithm can become a source for slow down.
+
+\subsection{Faulty Facebook Example}
+
+Facebook typically load about 10 TB of compressed data per day.  Suppose that given 100 workers with each capable of performing two mappings concurently.  Using input splits of 256 MB,  a workload of 10 TB will require ~400 mapper invokes.  Also, lets suppose that each mapper takes 17 seconds to run, so in total 400 mappers will take ~520 seconds.  
+\par
+Since failures are very common in Map Reduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occured.
+
+\subsection{Local Checkpoints}
+
+Like DBMS, map reduce would benefit from local checkpoints so that in the case of failures, a node can pick up a more optimized restart location.  Several early attempts have being made in implementing such functionality but have not produced results that dramatically improve map reduce's restart mechanism \cite{yang2010osprey}.  There are three challenges that any solution needs to resolve.
+\  \\
+\begin{enumerate}
+	\setlength\itemsep{1em}
+	\item Checkpoints relies on the storage solution's replication engine.  Increasing the number of checkpoints places additional strain on the storage.
+	\item Additional communication needs to be relayed intra compute nodes in order to make aware of the additional checkpoints.
+	\item Recovering from failure requires fetching checkpoint from intermediate storage, which may or may not involve additional network bandwidth.
+\end{enumerate}
+\  \\
 
 
 
