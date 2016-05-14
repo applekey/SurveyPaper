@@ -1,9 +1,13 @@
 \documentclass[10pt,twocolumn]{IEEEtran11}
 \usepackage{listings}
+\usepackage{caption}
 \lstset{
 	frame = single, 
 	language=C++,
 	basicstyle=\tiny}
+
+\captionsetup[lstlisting]{ format=listing, labelfont=white, textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize} }
+
 \usepackage{times}
 \usepackage{epsfig}
 \usepackage[T1]{fontenc}
@@ -161,7 +165,7 @@ DBMS systems have very mature and well-studied failure mechanisms.  For the purp
 take advantage of the work that has already being completed and restart at the most optimal point before the crash.
 
 \subsection{Optimizations}
-DBMS systems use table schemas and indexing in order to allow the relational SQL query language to both logically analyze(static optimization) as well as dynamically adjust query execution based on the layout and size of the stored data per table. Take for example, the query \ref{queryOptimization}, given the tables:
+DBMS systems use table schemas and indexing in order to allow the relational SQL query language to both logically analyze(static optimization) as well as dynamically adjust query execution based on the layout and size of the stored data per table. Take for example, the listing 1, given the tables:
 \  \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
@@ -171,7 +175,7 @@ DBMS systems use table schemas and indexing in order to allow the relational SQL
 \end{enumerate}
 \  \\
 %http://www.cs.gonzaga.edu/~bowers/courses/cpsc421-f09/optimization-examples.pdf
-\begin{lstlisting} [label=queryOptimization]
+\begin{lstlisting} [caption=SQL Join]
 SELECT S.sid, S.sname, S.age
 FROM   Sailors S, Boats B, Reserves R
 WHERE  B.bid = R.rid AND B.bid = R.bid AND
@@ -403,18 +407,18 @@ The MapReduce execution of this query follows a similar path to that of DBMS, fi
 
 \subsection{MapReduce Join}
 
-Joins in MapReduce are run in $O(n^2)$ time due to lack of help from indexes or any table schema.  In the first stage, the mapper maps both tables using the join column as the key, this produces the intermediate results as shown in figure \ref{fig:mrJoin}, stage 1.  In stage 2, the mapper's local aggregation pairs all values per key, now both employees and department records share the same key. In stage 3, the reducer  runs a double for loop, looping through each employee record in the outer loop and then each department record in the inner loop, if the value's tag is not the same tag as the outer loop's tag, this means that these two values need to be joined.  The reducer's code for stage is include in code listing \ref{joinCode}, take note of line 5 as well line 6, where the tag comparison for tags as well join of values are run, these are expensive Java string operations. 
+Joins in MapReduce are run in $O(n^2)$ time due to lack of help from indexes or any table schema.  In the first stage, the mapper maps both tables using the join column as the key, this produces the intermediate results as shown in figure \ref{fig:mrJoin}, stage 1.  In stage 2, the mapper's local aggregation pairs all values per key, now both employees and department records share the same key. In stage 3, the reducer  runs a double for loop, looping through each employee record in the outer loop and then each department record in the inner loop, if the value's tag is not the same tag as the outer loop's tag, this means that these two values need to be joined.  The reducer's code for stage is include in code listing 2, take note of line 5 as well line 6, where the tag comparison for tags as well join of values are run, these are expensive Java string operations. 
 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[height = 13cm,width=9cm]{images/mapReduceJoin.png}
+	\includegraphics[height = 14cm,width=9cm]{images/mapReduceJoin.png}
 	\caption{Join stages in MapReduce}
 	\label{fig:mrJoin}
 \end{figure}
 
 %fix: fix this listing
-\begin{lstlisting} [label=joinCode]
+\begin{lstlisting} [caption=Reduce join]
 1. reduce (K dept_id, list<tagged_rec> tagged_recs)  {
 2.  for (tagged_rec : tagged_recs) {
 3.    for (tagged_rec1 : taagged_recs) {
@@ -448,9 +452,9 @@ XML, JSON, Apache's Thrift, or other formats can be modified in order to very ba
 
 \subsection{Optimized Data Flow}
 
-Due to the rigid execution model of MapReduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops. Loops are very common in machine learning algorithms that apply a function repeatably tot he same input, optimizing a single parameter at a time. Take for example a simple program, program \ref{loopCode} that invokes MapReduce over a number of iterations.
+Due to the rigid execution model of MapReduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops. Loops are very common in machine learning algorithms that apply a function repeatably tot he same input, optimizing a single parameter at a time. Take for example a simple program, listing 3 that invokes MapReduce over a number of iterations.
 
-\begin{lstlisting} [label=loopCode]
+\begin{lstlisting} [caption = Iterative loop MapReduce program]
 1. for(int i = 0: i < 10; i++)
 2. {
 3. 	MyMapReduceProgram(i);
@@ -521,11 +525,11 @@ The Raft recovery algorithm attempts to solve the above three issues by adopting
 
 
 \subsection{Performance Benchmark}
-A simple aggregation task, listing \ref{raftAggregation} was performed.  This task was chosen because the group by a considerable amount of intermediate results.  The data set User Visits consists of 50 GB, about 900 M (key, value) tuples.
+A simple aggregation task, listing 4 was performed.  This task was chosen because the group by a considerable amount of intermediate results.  The data set User Visits consists of 50 GB, about 900 M (key, value) tuples.
 \par
 Figure \ref{fig:raftPerformance} demonstrates that as the number of bad records per split increases, Raft check pointing is a much more efficient failure mechanism resulting in lower total execution times. 
 
-\begin{lstlisting} [label=raftAggregation]
+\begin{lstlisting} [caption = Group by benchmark query]
 SELECT sourceIP, SUM(adRevenue)
 FROM UserVisits
 GROUP BY sourceIP;
