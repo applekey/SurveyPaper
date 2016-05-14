@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 14:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 14:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -564,11 +564,6 @@ Underfull \hbox (badness 1270) in paragraph at lines 345--346
 
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 352.
-
-Overfull \hbox (28.74397pt too wide) in paragraph at lines 362--362
-[]\T1/ptm/m/n/10 Hadoop/DBMS- 
- []
-
 [6] <images/mapReduceJoin.png, id=37, 599.841pt x 596.2275pt>
 File: images/mapReduceJoin.png Graphic file (type png)
 
@@ -973,7 +968,7 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (10 pages, 645957 bytes).
+Output written on main.pdf (10 pages, 646161 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream

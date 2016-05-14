@@ -349,15 +349,15 @@ The final task is a situation where MapReduce programming model is inefficient i
 
 \begin{table}[h!]
 	\centering
-\begin{tabu} to 0.4\textwidth { | X[l] | X[c] | X[r] | X[l] |}
+\begin{tabu} { | X[l] | X[c] | X[c] | X[c] |}
 	\hline
-    & Hadoop & DBMS-x & Hadoop/DBMS-x\\ 
+    & Hadoop & DBMS-x & Hadoop $/$ DBMS-x\\ 
 	\hline
-	Grep  & 284s  & 194s  & 1.5x  \\
+	Grep  & 284s  & 194s  & 1.5 \\
 	\hline
-	Web Log  & 1,146s  & 740s& 1.6x  \\
+	Web Log  & 1,146s  & 740s& 1.6  \\
 	\hline
-	Join  & 1,1158s  & 32s& 36.3x  \\
+	Join  & 1,1158s  & 32s& 36.3 \\
 	\hline
 \end{tabu}
 \caption{Hadoop vs DBMS-x performance}
@@ -368,7 +368,7 @@ The final task is a situation where MapReduce programming model is inefficient i
 The comparison of join tasks between Hadoop and DBMS-x demonstrates a large difference in execution times where Hadoop loses considerably.  This section will give some insight as to why there is such a large performance difference.  Take an example data set consisting of two tables, Employees and Department
 \begin{table}[h!]
 	\centering
-	\begin{tabu} to 0.4\textwidth { | X[l] | X[c] | X[r]  |}
+	\begin{tabu} to 0.4\textwidth { | X[l] | X[c] | X[c]  |}
 		\hline
 		Name & Age & Dept Id\\ 
 		\hline
