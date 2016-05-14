@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -472,37 +472,39 @@ Overfull \hbox (13.4291pt too wide) in paragraph at lines 464--465
 File: images/logicalRegression.png Graphic file (type png)
 
 <use images/logicalRegression.png>
-Package pdftex.def Info: images/logicalRegression.png used on input line 476.
+Package pdftex.def Info: images/logicalRegression.png used on input line 475.
 (pdftex.def)             Requested size: 240.90186pt x 158.99521pt.
 
 <images/sparkPerformance.png, id=43, 608.2725pt x 269.005pt>
 File: images/sparkPerformance.png Graphic file (type png)
 
 <use images/sparkPerformance.png>
-Package pdftex.def Info: images/sparkPerformance.png used on input line 485.
+Package pdftex.def Info: images/sparkPerformance.png used on input line 484.
 (pdftex.def)             Requested size: 284.52756pt x 125.83307pt.
 
-Overfull \hbox (41.0291pt too wide) in paragraph at lines 485--486
+Overfull \hbox (41.0291pt too wide) in paragraph at lines 484--485
  [][] 
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \vbox (badness 1596) has occurred while \output is active []
 
-
-LaTeX Warning: Citation `bibid' on page 8 undefined on input line 495.
-
-[8 <./images/logicalRegression.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 503--505
+ [8 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 502--504
 
  []
 
 
-Underfull \hbox (badness 1057) in paragraph at lines 514--515
+Underfull \hbox (badness 1057) in paragraph at lines 513--515
 \T1/ptm/m/n/10 three is-sues by adopt-ing a hy-brid ap-proach in be-tween
  []
 
-<images/raftBenchmark.png, id=48, 383.4325pt x 294.09875pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 513--515
+
+ []
+
+<images/raftBenchmark.png, id=49, 383.4325pt x 294.09875pt>
 File: images/raftBenchmark.png Graphic file (type png)
 
 <use images/raftBenchmark.png>
@@ -513,7 +515,7 @@ Underfull \hbox (badness 2334) in paragraph at lines 545--546
 []\T1/ptm/m/n/10 This tech-nique of par-ti-tion-ing data into in-de-pen-dent
  []
 
-[9 <./images/sparkPerformance.png> <./images/raftBenchmark.png>] (./main.bbl
+[9 <./images/raftBenchmark.png>] (./main.bbl
 Underfull \hbox (badness 10000) detected at line 3
 \T1/ptm/m/n/8 [1]
  []
@@ -569,13 +571,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4479 strings out of 493089
- 62990 string characters out of 6134842
+ 4478 strings out of 493089
+ 62983 string characters out of 6134842
  145302 words of memory out of 5000000
- 7848 multiletter control sequences out of 15000+600000
+ 7847 multiletter control sequences out of 15000+600000
  72481 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,15n,58p,1318b,1066s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,15n,58p,1034b,1066s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -583,7 +585,7 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (10 pages, 646830 bytes).
+Output written on main.pdf (10 pages, 645484 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream

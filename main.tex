@@ -464,12 +464,11 @@ Both HaLoop and Twister work very similar to each other.  These frameworks first
 Pregel implements the Bulk Synchronous Parallel mode(BSP), in which each node owns its own input and output.  BSP assumes that access to each node's own memory is fast and remote memory access is much slower.  In this model, only the essential data is transfered between nodes through a communication and sync step.  
 
 \subsubsection{Apache Spark}
-Apache Spark is a twist on the original MapReduce framework.  It is intended to MapReduce's repetitive data loading from either loops or joins.  Instead Spark tries to keep everything in memory.   One of the reason MapReduce has such a rigid flow, with barriers between the map and reduce stage, where input, intermediate and output data is written to disk is that MapReduce has a very simplistic fault tolerance mechanisms.  Spark instead takes on a more DBMS approach of categorizing data into read only objects called resilient distributed data sets(RDD).  This allows spark to be more flexibility with what needs to be duplicated onto disk in order to ensure fault tolerance.  In addition, Spark's language supports the ability for programmers to explicitly control the size and lifetime of RDD's.  This gives the programmer a very big tuning knob in order to get the best performance  from their programs. More relaxed RDD failure schemes give better performance since most data is in memory, but worse failure recovery time, and more strict RDD failure schemes give the best performance for highly faulty systems.  Spark represents perhaps the most drastic over haul of the original MapReduce framework in order to deal with invariant data, and the performance demonstrates the effectiveness of RDD's.
+Apache Spark is a twist on the original MapReduce framework.  Instead of relying heavily on the writing to the HDFS for fault tolerance, Spark instead tries to keep as much as possible in memory.   Spark re-invent's MapReduce's basic fault tolerance mechanism and instead takes on a more DBMS approach of categorizing data into read only objects called resilient distributed data sets(RDD).  This allows spark to be more flexibility with what needs to be duplicated onto disk in order to ensure fault tolerance.  In addition, Spark's language supports the ability for programmers to explicitly control the size and lifetime of RDD's.  This gives the programmer a very big tuning knob in order to get the best performance  from their programs. More relaxed RDD failure schemes give better performance since most data is in memory.  Spark represents perhaps the most drastic overhaul of the original MapReduce framework in order to deal with invariant data, and the performance benchmarks backs up the effectiveness of RDD's.
 
 
 \subsubsection{Apache Spark Performance}
-
-A benchmark Spark program that measured the time it takes to complete a logical regression of a dataset was benchmarked versus Hadoop.  The program iteratively attempts to find a hyperplane $w$ that best separates two sets of points, figure \ref{fig:logicalRegression} gives a 2D example.   The logical regression accomplishes this through a gradient descent method, starting at a random $w$ and over n iterations moves closer to the true $w$ through finding the gradient.  This test benefits greatly from caching input data (the points) since it does not change each iteration.
+Apache Spark and Hadoop were both compared with a benchmark program that measured the time it takes to complete a logical regression of a dataset.  The program iteratively attempts to find a hyperplane $w$ that best separates two sets of points, figure \ref{fig:logicalRegression} gives a 2D example.   The logical regression accomplishes this through a gradient descent method, starting at a random $w$ and over n iterations moves closer to the true $w$ through finding the gradient.  This test benefits greatly from caching input data (the points) since they do not change each iteration.
 
 \begin{figure}[h]
 	\centering
@@ -488,15 +487,15 @@ This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 c
 \end{figure}
 
 \subsubsection{Application Level Frameworks}
-Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational query language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
+Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark engine uses for fault tolerance.  On top, there are 4 major application's, these are Spark SQL, Spark's relational query language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
 
 \section{MapReduce Fault Tolerance}
 
-Hadoop has an extremely naive algorithm in order to handle failed nodes.   When the master scheduler detects that a node has failed, it will simply restart that node in its entirety.  Since Hadoop was built with fault tolerance as a first class citizen, failures in nodes are not abnormalities, large Hadoop clusters often experience a multitude of  failures over the course of a day  \cite{bibid}.  Lets take a practical example from Facebook to motivate why Hadoop's naive restart algorithm can become a source for slow down.
+Hadoop has an extremely naive algorithm in order to handle failed nodes.   When the master scheduler detects that a node has failed, it will simply restart that node in its entirety.  Since Hadoop was built with fault tolerance as a first class citizen, failures in nodes are not abnormalities, large Hadoop clusters often experience a multitude of  failures over the course of a day.  Lets take a practical example from Facebook to motivate why Hadoop's naive restart algorithm can become a source for slow down.
 
 \subsection{Faulty Facebook Example}
 
-Since failures are very common in MapReduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occurred.
+Since failures are very common in MapReduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) * 2 * 200= ~500 seconds recovery time, about the same time if the no faults had occurred.
 
 \subsection{Local Checkpoints}
 
@@ -505,23 +504,24 @@ Like DBMS, MapReduce would benefit from local checkpoints so that in the case of
 \begin{enumerate}
 	\setlength\itemsep{1em}
 	\item Checkpoints relies on the storage solution's replication engine.  Increasing the number of checkpoints places additional strain on the storage.
-	\item Additional communication needs to be relayed intra compute nodes in order to make aware of the additional checkpoints.
+	\item Additional communication needs to be relayed inter nodes in order to make aware of the additional checkpoints.
 	\item Recovering from failure requires fetching checkpoint from intermediate storage, which may or may not involve additional network bandwidth.
 \end{enumerate}
 
 \subsection{Checkpoint - Rafts}
 
-The Raft recovery algorithm attempts to solve the above three issues by adopting a hybrid approach in between MapReduces naive implementation and the previous work.  Raft provides three features,
-
+The Raft recovery algorithm attempts to solve the above three issues by adopting a hybrid approach in between MapReduce's naive implementation and the previous work.  Raft provides three features,
+\  \\
 \begin{enumerate}
+	\setlength\itemsep{1em}
 	\item Local checkpoints, these deal with local task failures are have a very quick recovery scheme.
-	\item Remote checkpoints, these checkpoints are written to a share file system, these happen when a node failures either from network/hardware or OS failures.
+	\item Remote checkpoints, these checkpoints are written to a share file system, these happen when a node failures either from network, hardware, or OS failures.
 	\item Query Meta-data, when a node fails, a restarting node will use this meta data to determine the most optimal restart point.
 \end{enumerate}
 
 
 \subsection{Performance Benchmark}
-A simple aggregation task, listing \ref{raftAggregation} was performed.  This task was chosen because the group by a considerable amount of intermediate results.  The data set UserVisits consists of 50 GB, about 900 M (key, value) tuples.
+A simple aggregation task, listing \ref{raftAggregation} was performed.  This task was chosen because the group by a considerable amount of intermediate results.  The data set User Visits consists of 50 GB, about 900 M (key, value) tuples.
 \par
 Figure \ref{fig:raftPerformance} demonstrates that as the number of bad records per split increases, Raft check pointing is a much more efficient failure mechanism resulting in lower total execution times. 
 
