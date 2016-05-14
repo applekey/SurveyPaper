@@ -40,7 +40,7 @@ University of Oregon\\
 
 \begin{abstract}
 	
-	This survey paper is intended to compare traditional distributed DBMS systems with newer MapReduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
+	This survey paper is intended to compare traditional distributed DBMS systems with newer MapReduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that MapReduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
 \end{abstract}
 
 \section{Introduction}
@@ -90,15 +90,14 @@ If the query were to find all students that had more than 10,000 in student loan
 
 \section{Databases Management Systems}
 
-Databases management systems are  frameworks that are designed to store data in tabular tables with a set schema.  DBMS systems use relational queries to perform CRUD 
+Databases management systems are frameworks that are designed to store data in tabular tables with a set schema.  DBMS systems use relational queries to perform CRUD 
 (Create, read, update and delete)operations on the stored data.  
 
 %%\fix{write more here}
 
 \subsection{Parallel DBMS}
 
-Relational queries are ideal suited to run parallel since they
-each operation declares independent operations on independent data sets \cite{dewitt1992parallel}.  By partitioning the data among multiple processors, a single query can be carried out in parallel and the result merged into a final step.  In figure \ref{fig:disDBMS}, an independent scan (ex, look for key word) is applied and the results are sorted (binned by first letter) and then the result of each independent operation is merged into the final result.
+Relational queries are ideal suited to run parallel since each operation declares independent operations on independent data sets \cite{dewitt1992parallel}.  By partitioning the data among multiple processors, a single query can be carried out in parallel and the result merged into a final step.  In figure \ref{fig:disDBMS}, an independent scan (ex. look for key word) is applied and the results are sorted by binning by first letter. The final result of each independent operation is merged into the final result.
 
 \begin{figure}[h]
 \centering
@@ -109,24 +108,24 @@ each operation declares independent operations on independent data sets \cite{de
 
 \subsection{Distributed DBMS}
 
-Distributed DBMS systems require an additional layer of abstraction on top of Parallel DBMS.  Where as in parallel DBMS systems, all queries are run on the same machine sharing the same memory space.  Distributed DBMS systems need to consider the additional factor of latency when access data that does not reside in the current compute machine.  Additional, distributed DBMS systems need to consider what impact does the memory layout have in preventing easily adding more compute nodes.  
+Distributed DBMS systems are an additional layer of abstraction on top of Parallel DBMS.  Where in parallel DBMS systems, all queries are run on the same machine sharing the same memory space.  Distributed DBMS systems access memory through a shared memory controller.  This memory controller is often not local and instead accessed through a router.  Distributed DBMS systems need to consider the additional factor of latency when access data that does not reside in the current compute machine.  A large factor in determining the performance of a distributed DBMS system is how efficient the memory layout is such that network traffic between different nodes is minimized. 
 
 Generally speaking, there are three main types of memory 
-architectures for distributed DBMS systems, shared-nothing, shared-memory, shared-disk.
+architectures for distributed DBMS systems, Shared-Nothing, Shared-Memory, Shared-Disk.
 \  \\
 \begin{enumerate}
 \setlength\itemsep{1em}
-\item Shared-Memory: All compute machines share access to a global memory as well as disk storage.  
-\item Shared-Disk: Each compute machines have their own memory, but share global disk.
-\item Shared Nothing: Each compute machine has their own memory and disk. 
+\item Shared-Memory: All compute machines share access to a global memory as well as global disk storage.  
+\item Shared-Disk: Each compute machine has their own memory, but share a global disk.
+\item Shared-Nothing: Each compute machine owns their own memory and disk. 
 \end{enumerate}
 \ \\
-Share Nothing architectures have being adopted with wide popularity due to its characteristics of minimizing resource sharing.  In addition, the lack of a shared memory or hard disk means that commodity interconnection networking can be used.  Such minimal dependence between nodes and the lack of an interconnect fabric enable Shared nothing architectures to have many backup and duplication layers allowing for better reliability.  In summary, shared nothing architectures enable scaling to happen at a massive scale.  To give an example, during the period of this research, the largest shared nothing system was Intel's 2000 node Hypercube, while many competing shared-memory multi-processors were limited to only about 32 processors. 
+Share-Nothing architectures have being adopted with wide popularity due to its characteristics of minimizing resource sharing.  In addition, the lack of a Shared-Memory or hard disk means that commodity interconnection networking switches can be used.  This characteristic of minimal dependence between nodes and the lack of an interconnect fabric enable Shared-Nothing architectures to have many backup and duplication layers allowing for better reliability.  In summary, Shared-Nothing architectures enable scaling to happen at a massive scale.  For example, in the 1990's the largest Shared-Nothing system was Intel's 2000 node Hypercube, while many competing Shared-Memory multi-processors were limited to only about 32 processors. 
 \par
-Shared memory and shared disk systems do not scale as well due to the network traffic between all the compute nodes.  All compute nodes are competing for the network which is a shared resource, any advantage gained from accessing the shared memory quickly dissolves as the slowdown from the network becomes the major bottleneck \cite{thakkar1990performance}.  There have being many attempts to implement affinity scheduling much like processor affinity to a particular processor, but these attempts have not yielded favorable results.  
+Shared-Memory and Shared-Disk systems do not scale as well due to excessive internode network traffic.  During a computation, the shared network switch quickly becomes a bottleneck, any advantage gained from accessing shared memory quickly dissolves as the network struggles to keep up with all compute node's requests \cite{thakkar1990performance}.  There have being many attempts to implement affinity scheduling much like processor affinity to a particular processor, but these attempts have not yielded any favorable results.  
 \subsection{Data Partitioning}
 
-Data Partitioning involves a large dataset across multiple disks in order for distributed databases.   This strategy is used to utilize the I/O bandwidth of multiple disks read and written in parallel for data independent queries.  There are three common strategists, the goal of all three is to minimize the amount of un-necessary communication between disks by placing data needed by independent compute nodes locally within their assigned disk. Figure \ref{fig:dbmsDataPartition} gives a visual representation of the three.
+Data Partitioning involves a large dataset across multiple disks in order for distributed databases.  This strategy is used to utilize the I/O bandwidth of multiple disks read and written in parallel for data independent queries.  There are three common strategists, the goal of all three is to minimize the amount of un-necessary communication between disks by placing data needed by independent compute nodes locally within their assigned disk. Figure \ref{fig:dbmsDataPartition} gives a visual representation of the three.
 
 \  \\
 \begin{enumerate}
@@ -153,7 +152,7 @@ Data Partitioning involves a large dataset across multiple disks in order for di
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{images/dbmsDataPartition.png}
-	\caption{Three different types of data partitioning used by shared nothing DBMS  \protect\cite{dewitt1992parallel}.}
+	\caption{Three different types of data partitioning used by Shared-Nothing DBMS  \protect\cite{dewitt1992parallel}.}
 	\label{fig:dbmsDataPartition}
 \end{figure}
 
@@ -192,12 +191,12 @@ The DBMS engine can then use a combination of information on the size of each le
 \par
 --> need to write something here about in memory tables
 
-\section {Map Reduce}
+\section {MapReduce}
 
-Map Reduce is a general distributed computation framework introduced by Google in 2004 \cite{dean2001mapreduce}.  Map reduce is different from distributed DBMS systems in that much more general computations can be defined, not limited by the query language of a rigid schema as is the case with DBMS systems.  Map Reduce, like DBMS systems have fault tolerance mechanisms but they operate differently than DBMS systems due to the architectural differences. 
+MapReduce is a general distributed computation framework introduced by Google in 2004 \cite{dean2001mapreduce}.  MapReduce is different from distributed DBMS systems in that much more general computations can be defined, not limited by the query language of a rigid schema as is the case with DBMS systems.  MapReduce, like DBMS systems have fault tolerance mechanisms but they operate differently than DBMS systems due to the architectural differences. 
 
 \subsection{Mapper and Reducer}
-Map reduce operates in two steps, the map step and then the reduce step.  Both steps are independent in that the reduce step will not start until all mappers have completed.
+MapReduce operates in two steps, the map step and then the reduce step.  Both steps are independent in that the reduce step will not start until all mappers have completed.
 In the map stage, the data is partitioned equally among N mappers.  Input data arrives to the mapper as a list of (key, value) pairs, the mapper applies a user-defined map operation.
 The map operation produces an intermediate (key, value) pairs which are the results of the map operations, these results are written and saved to the file system.  
 \par
@@ -208,33 +207,33 @@ Figure \ref{fig:mapReduce} gives an execution diagram.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.50]{images/mapReduce.png}
-\caption{Map Reduce Program Execution}
+\caption{MapReduce Program Execution}
 \label{fig:mapReduce}
 \end{figure}
 
 \subsection{Hadoop}
-There are two very popular frameworks that implement the map reduce concept, these are the closed source Google Map Reduce and open source version Hadoop Map Reduce.  
-This paper will focus on Hadoop instead of Google Map Reduce since the complete details of Google Map Reduce and relatively unknown, however both frameworks function similarly.
+There are two very popular frameworks that implement the MapReduce concept, these are the closed source Google MapReduce and open source version Hadoop MapReduce.  
+This paper will focus on Hadoop instead of Google MapReduce since the complete details of Google MapReduce and relatively unknown, however both frameworks function similarly.
 \par
 Hadoop consist of three layers:
 \  \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
 	\item Application layer
-	\item Map Reduce layer
+	\item MapReduce layer
 	\item HDFS layer
 \end{enumerate} 
 \  \\
-The HDFS layer is Hadoop's storage layer.  The HDFS structures data in blocks that is managed by a master node, when the map reduce runs, the master node will assign each individual mapper data chunks as broken down by the HDFS.  More importantly, the HDFS layer has the is one major component Hadoop Map Reduce's mechanism for
-fault tolerance.  The application layer sits on top of the map reduce layer.  The application layer consists of several additions to the standard map reduce framework, these include high level languages, database adaptations.  These application layer additions will be discussed later on in this survey paper.
+The HDFS layer is Hadoop's storage layer.  The HDFS structures data in blocks that is managed by a master node, when the MapReduce runs, the master node will assign each individual mapper data chunks as broken down by the HDFS.  More importantly, the HDFS layer has the is one major component Hadoop MapReduce's mechanism for
+fault tolerance.  The application layer sits on top of the MapReduce layer.  The application layer consists of several additions to the standard MapReduce framework, these include high level languages, database adaptations.  These application layer additions will be discussed later on in this survey paper.
 
 \subsection{Parallel and Distributed Computation}
 
-The main advantage of the map reduce concept is that there are no dependency between mappers or mappers.  Map reduce therefore is extremely scalable, adding additional nodes either through adding additional cores or compute nodes is a relatively simple task.  This design is very similar to that of the share nothing architecture found in parallel DBMS systems.
+The main advantage of the MapReduce concept is that there are no dependency between mappers or mappers.  MapReduce therefore is extremely scalable, adding additional nodes either through adding additional cores or compute nodes is a relatively simple task.  This design is very similar to that of the share nothing architecture found in parallel DBMS systems.
 
 \subsection{Fault Tolerance}
 
-Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a map reduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.  Hadoop Map Reduce's failure's can be categorized into three categories.
+Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolerance through replication.  When a MapReduce job is invoked, the input data is triple replicated on the HDFS.  When the mapper or reducer has completed, again the intermediate/final result is triple duplicated.  When the master node, which is responsible for keeping track fo map/reduce jobs notices that a node has failed, the master node will reschedule the map/reduce job with the input/intermediate data.  Hadoop MapReduce's failure's can be categorized into three categories.
 \ \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
@@ -258,10 +257,10 @@ Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolera
 \end{enumerate}
 \ \\
 
-\section{DBMS vs Map Reduce}
-Map reduce and distributed DBMS systems are very similar in that both are parallel data processing frameworks, both support roughly the same feature sets, performance, fault tolerance, user-combustibility.  However, map reduce is far more flexible,  where  as DBMS require data to be organized into schema map reduce can be applied to any variety of data set.  This flexibility is not without its trade-offs though, in general is found to be ~15 - 20 percent slower than that of map reduce in a variety of general tasks \cite{pavlo2009comparison}.  This section will cover the differences between the two and present a performance study between the two.
+\section{DBMS vs MapReduce}
+MapReduce and distributed DBMS systems are very similar in that both are parallel data processing frameworks, both support roughly the same feature sets, performance, fault tolerance, user-combustibility.  However, MapReduce is far more flexible,  where  as DBMS require data to be organized into schema MapReduce can be applied to any variety of data set.  This flexibility is not without its trade-offs though, in general is found to be ~15 - 20 percent slower than that of MapReduce in a variety of general tasks \cite{pavlo2009comparison}.  This section will cover the differences between the two and present a performance study between the two.
 
-\subsection{Map Reduce Advantages}
+\subsection{MapReduce Advantages}
 
 \begin {enumerate}
 	\setlength\itemsep{1em}
@@ -269,7 +268,7 @@ Map reduce and distributed DBMS systems are very similar in that both are parall
 	
 	\textbf{Simplicity in Framework}
 	
-	Programming map reduce is easier to use than query languages such as SQL for two reasons.  Firstly, there are no complex language constructs as is the case with SQL, and secondly, the programmer does not need to understand a table's schema and data layout.
+	Programming MapReduce is easier to use than query languages such as SQL for two reasons.  Firstly, there are no complex language constructs as is the case with SQL, and secondly, the programmer does not need to understand a table's schema and data layout.
 	\item 
 	
 	\textbf{Flexibility}
@@ -285,7 +284,7 @@ Map reduce and distributed DBMS systems are very similar in that both are parall
 	
 \end {enumerate}
 
-\subsection{Map Reduce Disadvantages}
+\subsection{MapReduce Disadvantages}
 
 
 \begin {enumerate}
@@ -294,46 +293,46 @@ Map reduce and distributed DBMS systems are very similar in that both are parall
 
 \textbf{Lack of High Level Language}
 
-While map reduce is extremely to program due to the simplistic nature of the logical map and reduce function, the lack of a high level language means that there is very little in terms of portability when multiple map reduce stages are chained together.   Take for example, a very common query in SQL, select * from table where column 1 > value 1 and column 2 > value 2.  In map reduce, there would be two stages, the first stage
-would filter by column 1 and the second column 2.  The programmer would need to know to pass data from column 1 in first, then pass in data from column 2.  The programmer cannot pass in an entire row with multiple columns because map reduce only supports single (key,value ) pairs.
-In this regards, map reduce has often being compared with assembly programming, it is difficult to re-use a preexisting map reduce stage without knowing entirely the execution flow for it.  
+While MapReduce is extremely to program due to the simplistic nature of the logical map and reduce function, the lack of a high level language means that there is very little in terms of portability when multiple MapReduce stages are chained together.   Take for example, a very common query in SQL, select * from table where column 1 > value 1 and column 2 > value 2.  In MapReduce, there would be two stages, the first stage
+would filter by column 1 and the second column 2.  The programmer would need to know to pass data from column 1 in first, then pass in data from column 2.  The programmer cannot pass in an entire row with multiple columns because MapReduce only supports single (key,value ) pairs.
+In this regards, MapReduce has often being compared with assembly programming, it is difficult to re-use a preexisting MapReduce stage without knowing entirely the execution flow for it.  
 \item 
 
 \textbf{Rigid Data Flow}
 
-Map reduce runs in two discrete steps, the reduce step does not start until all the mapper steps have completed.  Since map reduce is a distributed system running on any kind of network, the possibility that there is a single straggler node is entirely not out of the ordinary.  In this situation, all compute nodes would have to wait on the straggler node.  DBMS systems do not have this constraint, using the Schema and query logic, the scheduler will schedule as many local reduces as possible from free compute nodes, this results faster execution times \cite{yang2007map}.
+MapReduce runs in two discrete steps, the reduce step does not start until all the mapper steps have completed.  Since MapReduce is a distributed system running on any kind of network, the possibility that there is a single straggler node is entirely not out of the ordinary.  In this situation, all compute nodes would have to wait on the straggler node.  DBMS systems do not have this constraint, using the Schema and query logic, the scheduler will schedule as many local reduces as possible from free compute nodes, this results faster execution times \cite{yang2007map}.
 
 \item 
 
 \textbf{Lack of Schema or Indexes}
 
-One of map reduce's biggest advantages, flexibility is also one of its largest disadvantages.  While not having a schema means that map reduce jobs have very fast initiation times,  on the other searching operations  are considerable slower.  A lack of schema also means that between multiple map reduce stages, data has to be parsed again and again.  In addition, the lack of a schema means that compile time optimizations cannot be made, only runtime optimizations as well, reductions in logic between multiple map reduce stages.
+One of MapReduce's biggest advantages, flexibility is also one of its largest disadvantages.  While not having a schema means that MapReduce jobs have very fast initiation times,  on the other searching operations  are considerable slower.  A lack of schema also means that between multiple MapReduce stages, data has to be parsed again and again.  In addition, the lack of a schema means that compile time optimizations cannot be made, only runtime optimizations as well, reductions in logic between multiple MapReduce stages.
 
 \end {enumerate}
 
 
 \subsection{Difference in Programming Model}
 %% -> I think this section should be moved into the high level language section
-Map reduce and DBMS represent an old discussion on two different views in methods to access data \cite{pavlo2009comparison}.  These are:
+MapReduce and DBMS represent an old discussion on two different views in methods to access data \cite{pavlo2009comparison}.  These are:
 \  \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
-	\item Relational view, state what you want rather than presenting an algorithm; this represents map reduce.
+	\item Relational view, state what you want rather than presenting an algorithm; this represents MapReduce.
 	\item Codasyl, an algorithm for data access; this represents query languages such as SQL.
 \end{enumerate} 
 \  \\
 At the time, it was concluded that relational are easier to understand and modify with Codasyl being criticized for being "too assembly similar to assembly".  
 
-\section{Map Reduce versus DBMS Performance} \label{mrVSDBMSSection}
+\section{MapReduce versus DBMS Performance} \label{mrVSDBMSSection}
 
-Hadoop Map Reduce and Parallel DBMS systems compared in performance for three category of tasks on a 100 node cluster.  The execution times between the two are presented in table \ref{table:hadoopVsDBMS}.  
+Hadoop MapReduce and Parallel DBMS systems compared in performance for three category of tasks on a 100 node cluster.  The execution times between the two are presented in table \ref{table:hadoopVsDBMS}.  
 
 \subsection{System Configurations}
-Both map reduce and DBMS systems were deployed on a 100 node cluster.  Each node has a single 2.40 GHz Intel Core 2 Duo with 4GB of ram and two 250GB SATA-I hard disks.  All 100 nodes were connected using two gigabyte 128 Gbps Ethernet switch with 50 nodes per switch.
+Both MapReduce and DBMS systems were deployed on a 100 node cluster.  Each node has a single 2.40 GHz Intel Core 2 Duo with 4GB of ram and two 250GB SATA-I hard disks.  All 100 nodes were connected using two gigabyte 128 Gbps Ethernet switch with 50 nodes per switch.
 
 \subsection{Grep Task}
 
-The first task was the grep task as was presented in the original Google Map Reduce paper.  This task involved searching for a specific keyword that occurred once every 1000 (key, value) pairs.   The total data set consisted of 1 TB split amount 100 nodes.  Per node, 10 GB of records consisting of 100B records was partitioned to assigned map tasks.  This test was designed to measure pure IO throughput of the two systems.  This grep task is designed such that both Hadoop Map Reduce and DBMS-x are not able to take advantage of indexes.  In addition, there is no reduce step in this experiment since if the specific keyword is found, it is outputted as the result.
+The first task was the grep task as was presented in the original Google MapReduce paper.  This task involved searching for a specific keyword that occurred once every 1000 (key, value) pairs.   The total data set consisted of 1 TB split amount 100 nodes.  Per node, 10 GB of records consisting of 100B records was partitioned to assigned map tasks.  This test was designed to measure pure IO throughput of the two systems.  This grep task is designed such that both Hadoop MapReduce and DBMS-x are not able to take advantage of indexes.  In addition, there is no reduce step in this experiment since if the specific keyword is found, it is outputted as the result.
 \par
 One would expect Hadoop to perform well in comparison to DBMS-x since Hadoop has a much simpler initialization mechanism, simply load data via (key, value) pairs.  However, referring to table \ref{table:hadoopVsDBMS}, Hadoop was 1.5 slower.  This slow down can be attributed to the need for repetitive record record parsing.  Since Hadoop does not have any special storage formats, such as DBMS data indexing and messaging, it is up to the use's code to  read in and write out data in the appropriate format.  In Hadoop's native language Java, (key, value) pairs are stored as immutable strings.  This means anytime any modification on any (key,value) pairs are done, the original string is deleted and re-created in memory.
 \par
@@ -345,7 +344,7 @@ The second task is a SQL aggregation, "GROUP BY" clause on a table of user visit
 Again, Hadoop is considerably slower than DBMS-x in performance.  The addition of a reduce step, where (key,value) immutable string pairs have to be serialized and de serialized may be the reason why this task has worse performance than the Grep task.
 
 \subsection {Join Task}
-The final task is a situation where map reduce model is inadequate in handling. The final task consist of a complex join operation over two tables which require both an aggregation and then filtering.   The data set utilizes the use visits from the previous join task joined with another 100 GB table of PageRank values that consist of 18 million URL's.  The first part consists of the system locating the IP address that generates the most revenue within a set range in the user visits data set.  The intermediate result records are then joined with the PageRank table and used to calculate the average Page Rank of all the pages visited during this interval.   Referring to table \ref{table:hadoopVsDBMS}, Hadoop is considerably, 36.3x slower than DBMS systems.  In the next paragraph, we will given some insight as to why the map reduce model fails so far when it comes to joins.
+The final task is a situation where MapReduce model is inadequate in handling. The final task consist of a complex join operation over two tables which require both an aggregation and then filtering.   The data set utilizes the use visits from the previous join task joined with another 100 GB table of PageRank values that consist of 18 million URL's.  The first part consists of the system locating the IP address that generates the most revenue within a set range in the user visits data set.  The intermediate result records are then joined with the PageRank table and used to calculate the average Page Rank of all the pages visited during this interval.   Referring to table \ref{table:hadoopVsDBMS}, Hadoop is considerably, 36.3x slower than DBMS systems.  In the next paragraph, we will given some insight as to why the MapReduce model fails so far when it comes to joins.
 
 \begin{table}[h!]
 	\centering
@@ -364,7 +363,7 @@ The final task is a situation where map reduce model is inadequate in handling. 
 \label{table:hadoopVsDBMS}
 \end{table}
 
-\section{Joins in DBMS vs Map Reduce} \label{mrJoinSection}
+\section{Joins in DBMS vs MapReduce} \label{mrJoinSection}
 
 Take an example data set consisting of two tables, Employees and Department
 \begin{table}[h!]
@@ -404,17 +403,17 @@ Take an example data set consisting of two tables, Employees and Department
 Suppose the following Join was carried out, " Select * from Employees join Department on Employees.DepartmentId = Department.DepartmentId".
 When this query is run on a DBMS system, the system has two options, in most situations' it will use the data's indexes to its advantage and carry out a hash join which is $O(1)$ time or at worst carry out a index join,$ O(log N) $time.  Also, all data representations are internally maintained in the database and no extraneous conversions are carried out.
 \par
-Having this query carried out through Map Reduce runs through a similar execution model, first a filter then an aggregate.  However, since the data have no indexes, hashing and divide and conquer techniques cannot be applied.  Every operation between the two tables is an $O(n^2)$ operation.  As well, there are extraneous serialization/de-serialization steps in between the map and filter steps.  The following section gives an example flow diagram as well as mapper and reduce pseudo code to demonstrate the join \cite{afrati2010optimizing}.
+Having this query carried out through MapReduce runs through a similar execution model, first a filter then an aggregate.  However, since the data have no indexes, hashing and divide and conquer techniques cannot be applied.  Every operation between the two tables is an $O(n^2)$ operation.  As well, there are extraneous serialization/de-serialization steps in between the map and filter steps.  The following section gives an example flow diagram as well as mapper and reduce pseudo code to demonstrate the join \cite{afrati2010optimizing}.
 
-\subsection{Map Reduce Join}
+\subsection{MapReduce Join}
 
-Joins in map reduce are run in $O(n^2)$ time due to lack of help from indexes or any table schema.  In the first stage, the mapper maps both tables using the join column as the key, this produces the intermediate results as shown in figure \ref{fig:mrJoin}, stage 1.  In stage 2, the mapper's local aggregation pairs all values per key, now both employees and department records share the same key. In stage 3, the reducer  runs a double for loop, looping through each employee record in the outer loop and then each department record in the inner loop, if the value's tag is not the same tag as the outer loop's tag, this means that these two values need to be joined.  The reducer's code for stage is include in code listing \ref{joinCode}, take note of line 5 as well line 6, where the tag comparison for tags as well join of values are run, these are expensive Java string operations. 
+Joins in MapReduce are run in $O(n^2)$ time due to lack of help from indexes or any table schema.  In the first stage, the mapper maps both tables using the join column as the key, this produces the intermediate results as shown in figure \ref{fig:mrJoin}, stage 1.  In stage 2, the mapper's local aggregation pairs all values per key, now both employees and department records share the same key. In stage 3, the reducer  runs a double for loop, looping through each employee record in the outer loop and then each department record in the inner loop, if the value's tag is not the same tag as the outer loop's tag, this means that these two values need to be joined.  The reducer's code for stage is include in code listing \ref{joinCode}, take note of line 5 as well line 6, where the tag comparison for tags as well join of values are run, these are expensive Java string operations. 
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[height = 13cm,width=9cm]{images/mapReduceJoin.png}
-	\caption{Join stages in map reduce}
+	\caption{Join stages in MapReduce}
 	\label{fig:mrJoin}
 \end{figure}
 
@@ -432,28 +431,28 @@ Joins in map reduce are run in $O(n^2)$ time due to lack of help from indexes or
 \end{lstlisting}
 
 
-\section{Map Reduce Applications}
+\section{MapReduce Applications}
 
-Since the introduction of the map reduce concept and its widespread adoption, either through Hadoop or Google Map Reduce, there have being many application level frameworks designed to address the several issues covered earlier.
+Since the introduction of the MapReduce concept and its widespread adoption, either through Hadoop or Google MapReduce, there have being many application level frameworks designed to address the several issues covered earlier.
 
 \subsection{High Level Languages}
 
-There have being several efforts in order to in corporate a more relational language on top of map reduce.  Higher level languages will enable a whole host of optimizations DBMS systems currently take advantage of.  This include static query optimization and easier map reduce module sharing among developers.  These are Microsoft SCOPE\cite{chaiken2008scope}, Apache Pig \cite{olston2008pig} and Apache Hive\cite{thusoo2009hive}.
+There have being several efforts in order to in corporate a more relational language on top of MapReduce.  Higher level languages will enable a whole host of optimizations DBMS systems currently take advantage of.  This include static query optimization and easier MapReduce module sharing among developers.  These are Microsoft SCOPE\cite{chaiken2008scope}, Apache Pig \cite{olston2008pig} and Apache Hive\cite{thusoo2009hive}.
 \par
-Pig is an open source project motivated by the Google Map Reduce's scripting language built on top of Hadoop.  Pig consists of two components, the language called Pig Latin and the execution framework.  The language Pig Latin supports nested data models and pre-defined UDF's that can be customized.  The Pig execution framework uses a logical analyzer to plan out the best query plan given the Pig Latin query input.
+Pig is an open source project motivated by the Google MapReduce's scripting language built on top of Hadoop.  Pig consists of two components, the language called Pig Latin and the execution framework.  The language Pig Latin supports nested data models and pre-defined UDF's that can be customized.  The Pig execution framework uses a logical analyzer to plan out the best query plan given the Pig Latin query input.
 \par
-Hive is also an open source project built on top of Hadoop.  Hive, like Pig supports a high level language called HiveQL that compiles directly into acylic graph map reduce jobs.  Hive also contains a schema model for the data as well provides run time staticis similar to DBMS.
+Hive is also an open source project built on top of Hadoop.  Hive, like Pig supports a high level language called HiveQL that compiles directly into acylic graph MapReduce jobs.  Hive also contains a schema model for the data as well provides run time staticis similar to DBMS.
 \par
-SCOPE is a Microsoft framework that sits on top of Microsoft's own map reduce called Cosmos.  It provides expressions very similar to SQL as well as C\# LINQ expressions.  In addition SCOPE is the only framework out of the three that supports custom SQL views, providing an additional layer of flexibility for programmers to interact with data.
+SCOPE is a Microsoft framework that sits on top of Microsoft's own MapReduce called Cosmos.  It provides expressions very similar to SQL as well as C\# LINQ expressions.  In addition SCOPE is the only framework out of the three that supports custom SQL views, providing an additional layer of flexibility for programmers to interact with data.
 
 \subsection{Support for Schemas}
 
-In the earlier section \ref{mrVSDBMSSection} and \ref{fig:mrJoin}, the large disadvantages of map reduce's lack of a schema was detailed.   Repetitive record parsing and the in-ability to use acceleration data structures to speed up tasks such as joins cause up to a 36 times performance slow down.  Though there has being very little research in this area, the earliest suggest that data formats such as Google's Protocol Buffers,
+In the earlier section \ref{mrVSDBMSSection} and \ref{fig:mrJoin}, the large disadvantages of MapReduce's lack of a schema was detailed.   Repetitive record parsing and the in-ability to use acceleration data structures to speed up tasks such as joins cause up to a 36 times performance slow down.  Though there has being very little research in this area, the earliest suggest that data formats such as Google's Protocol Buffers,
 XML, JSON, Apache's Thrift, or other formats can be modified in order to very basic data integrity and perhaps more advance data compression \cite{yang2007map}.
 
 \subsection{Optimized Data Flow}
 
-Due to the rigid execution model of map reduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops. Loops are very common in machine learning algorithms that apply a function repeatably tot he same input, optimizing a single parameter at a time. Take for example a simple program, program \ref{loopCode} that invokes map reduce over a number of iterations.
+Due to the rigid execution model of MapReduce, sequential programs that incorporate loops suffer in performance due to the problem of loading repetitive data over multiple loops. Loops are very common in machine learning algorithms that apply a function repeatably tot he same input, optimizing a single parameter at a time. Take for example a simple program, program \ref{loopCode} that invokes MapReduce over a number of iterations.
 
 \begin{lstlisting} [label=loopCode]
 1. for(int i = 0: i < 10; i++)
@@ -462,14 +461,14 @@ Due to the rigid execution model of map reduce, sequential programs that incorpo
 4. }
 \end{lstlisting}
 
-For each iteration of the loop, the map reduce program would have to read in the program's initialization data and output the iteration's results.  Even though perhaps only one variable has changed in the data, the entire dataset has to be read in, in its entirety.  To solve this problem, there have being several frameworks designed to identify loop invariant data to avoid loading and unloading unnecessary.   These are, HaLoop \cite{bu2010haloop}, Twister \cite{ekanayake2010twister},  Pregel \cite{malewicz2010pregel} and Apache Spark\cite{zaharia2010spark}. 
+For each iteration of the loop, the MapReduce program would have to read in the program's initialization data and output the iteration's results.  Even though perhaps only one variable has changed in the data, the entire dataset has to be read in, in its entirety.  To solve this problem, there have being several frameworks designed to identify loop invariant data to avoid loading and unloading unnecessary.   These are, HaLoop \cite{bu2010haloop}, Twister \cite{ekanayake2010twister},  Pregel \cite{malewicz2010pregel} and Apache Spark\cite{zaharia2010spark}. 
 \par
 Both HaLoop and Twister work very similar to each other.  These frameworks first identify invariant data between iterations, maintain them in memory.  Twister accomplishes this by re-using previously instantiated workers with modified inputs between iterations.  HaLoop takes this idea further by also caching input and output data per stage.
 \par
 Pregel implements the Bulk Synchronous Parallel mode(BSP), in which each node owns its own input and output.  BSP assumes that access to each node's own memory is fast and remote memory access is much slower.  In this model, only the essential data is transfered between nodes through a communication and sync step.  
 
 \subsubsection{Apache Spark}
-Apache Spark is a twist on the original map reduce framework.  It is intended to map reduce's repetitive data loading from either loops or joins.  Instead Spark tries to keep everything in memory.   One of the reason map reduce has such a rigid flow, with barriers between the map and reduce stage, where input, intermediate and output data is written to disk is that map reduce has a very simplistic fault tolerance mechanisms.  Spark instead takes on a more DBMS approach of categorizing data into read only objects called resilient distributed data sets(RDD).  This allows spark to be more flexibility with what needs to be duplicated onto disk in order to ensure fault tolerance.  In addition, Spark's language supports the ability for programmers to explicitly control the size and lifetime of RDD's.  This gives the programmer a very big tuning knob in order to get the best performance  from their programs. More relaxed RDD failure schemes give better performance since most data is in memory, but worse failure recovery time, and more strict RDD failure schemes give the best performance for highly faulty systems.  Spark represents perhaps the most drastic over haul of the original map reduce framework in order to deal with invariant data, and the performance demonstrates the effectiveness of RDD's.
+Apache Spark is a twist on the original MapReduce framework.  It is intended to MapReduce's repetitive data loading from either loops or joins.  Instead Spark tries to keep everything in memory.   One of the reason MapReduce has such a rigid flow, with barriers between the map and reduce stage, where input, intermediate and output data is written to disk is that MapReduce has a very simplistic fault tolerance mechanisms.  Spark instead takes on a more DBMS approach of categorizing data into read only objects called resilient distributed data sets(RDD).  This allows spark to be more flexibility with what needs to be duplicated onto disk in order to ensure fault tolerance.  In addition, Spark's language supports the ability for programmers to explicitly control the size and lifetime of RDD's.  This gives the programmer a very big tuning knob in order to get the best performance  from their programs. More relaxed RDD failure schemes give better performance since most data is in memory, but worse failure recovery time, and more strict RDD failure schemes give the best performance for highly faulty systems.  Spark represents perhaps the most drastic over haul of the original MapReduce framework in order to deal with invariant data, and the performance demonstrates the effectiveness of RDD's.
 
 
 \subsubsection{Apache Spark Performance}
@@ -495,17 +494,17 @@ This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 c
 \subsubsection{Application Level Frameworks}
 Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational query language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
 
-\section{Map Reduce Fault Tolerance}
+\section{MapReduce Fault Tolerance}
 
 Hadoop has an extremely naive algorithm in order to handle failed nodes.   When the master scheduler detects that a node has failed, it will simply restart that node in its entirety.  Since Hadoop was built with fault tolerance as a first class citizen, failures in nodes are not abnormalities, large Hadoop clusters often experience a multitude of  failures over the course of a day  \cite{bibid}.  Lets take a practical example from Facebook to motivate why Hadoop's naive restart algorithm can become a source for slow down.
 
 \subsection{Faulty Facebook Example}
 
-Since failures are very common in Map Reduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occurred.
+Since failures are very common in MapReduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occurred.
 
 \subsection{Local Checkpoints}
 
-Like DBMS, map reduce would benefit from local checkpoints so that in the case of failures, a node can pick up a more optimized restart location.  Several early attempts have being made in implementing such functionality but have not produced results that dramatically improve map reduce's restart mechanism \cite{yang2010osprey}.  There are three challenges that any solution needs to resolve.
+Like DBMS, MapReduce would benefit from local checkpoints so that in the case of failures, a node can pick up a more optimized restart location.  Several early attempts have being made in implementing such functionality but have not produced results that dramatically improve MapReduce's restart mechanism \cite{yang2010osprey}.  There are three challenges that any solution needs to resolve.
 \  \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
@@ -516,7 +515,7 @@ Like DBMS, map reduce would benefit from local checkpoints so that in the case o
 
 \subsection{Checkpoint - Rafts}
 
-The Raft recovery algorithm attempts to solve the above three issues by adopting a hybrid approach in between map reduces naive implementation and the previous work.  Raft provides three features,
+The Raft recovery algorithm attempts to solve the above three issues by adopting a hybrid approach in between MapReduces naive implementation and the previous work.  Raft provides three features,
 
 \begin{enumerate}
 	\item Local checkpoints, these deal with local task failures are have a very quick recovery scheme.
@@ -543,13 +542,13 @@ GROUP BY sourceIP;
 	\label{fig:raftPerformance}
 \end{figure}
 
-\section{Origins of Map Reduce Concept}
+\section{Origins of MapReduce Concept}
 
-The ideas of map and reduce are not entirely novel.  The strategy of partitioning  data sets into smaller concurrent pieces has being around for the last 20 years.  It was first proposed in the article, Application of Hash to Data Base Machine and Its Architecture \cite{kitsuregawa1983application}.   In a following article, "Multiprocessor Hash-Based Join Algorithms"\cite{dewitt1985multiprocessor}, Gerber describes how partitioning scheme can be extended in parallel to handle joins on a shared- nothing architecture. 
+The ideas of map and reduce are not entirely novel.  The strategy of partitioning  data sets into smaller concurrent pieces has being around for the last 20 years.  It was first proposed in the article, Application of Hash to Data Base Machine and Its Architecture \cite{kitsuregawa1983application}.   In a following article, "Multiprocessor Hash-Based Join Algorithms"\cite{dewitt1985multiprocessor}, Gerber describes how partitioning scheme can be extended in parallel to handle joins on a Shared- Nothing architecture. 
 \par
-This technique of partitioning data into independent chunks, shared-nothing architectures as well as using memory to speed up computation has being used and refined in commercial DBMS systems since the 1980's.
+This technique of partitioning data into independent chunks, Shared-Nothing architectures as well as using memory to speed up computation has being used and refined in commercial DBMS systems since the 1980's.
 \par
-Map reduce advocates might argue that the move away from a relational SQL like language is what differentiates map reduce from DBMS systems of yesterday, but POSTGRES systems included support for user-defined  mappers and aggregates  since the mid 1980's.  DBMS systems are not usually associated with the Codasyl method because the Database community as a whole decided that the relational view was easier to understand logically and more portable.  
+MapReduce advocates might argue that the move away from a relational SQL like language is what differentiates MapReduce from DBMS systems of yesterday, but POSTGRES systems included support for user-defined  mappers and aggregates  since the mid 1980's.  DBMS systems are not usually associated with the Codasyl method because the Database community as a whole decided that the relational view was easier to understand logically and more portable.  
 
 
 
