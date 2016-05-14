@@ -121,9 +121,37 @@ architectures for distributed DBMS systems, shared-nothing, shared-memory, share
 \end{enumerate}
 
 \subsection{Fault Tolerance}
-DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the general fault tolerance section.  DBMS systems take advantage of the schema and transactions implement restart at different granularity levels.  Through the use of larger compute node level transactions as well as much smaller procedural level transactions, DBMS systems are able to advantage of the work that has already being completed and restart at the most optimal point before the crash.
+DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the general fault tolerance section.  DBMS systems take advantage of the schema and transactions implement restart at different granularity levels.  Through the use of larger compute node level transactions as well as much smaller procedural level transactions, DBMS systems are able to 
+advantage of the work that has already being completed and restart at the most optimal point before the crash.
 
+\subsection{Optimizations}
+DBMS systems use table schemas and indexing in order to allow the relational SQL query language to both logically analyze(static optimization) as well as dynamically adjust query execution based on the layout of the stored data. Take for example, the query \ref{queryOptimization}, given the tables:
+\  \\
+\begin{enumerate}
+	\setlength\itemsep{1em}
+	\item Sailors (sid, sname, rating, age)
+	\item Boats (bid, bname, color)
+	\item Reserves (sid, bid, day, rname)
+\end{enumerate}
+\  \\
+%http://www.cs.gonzaga.edu/~bowers/courses/cpsc421-f09/optimization-examples.pdf
+\begin{lstlisting} [label=queryOptimization]
+SELECT S.sid, S.sname, S.age
+FROM   Sailors S, Boats B, Reserves R
+WHERE  B.bid = R.rid AND B.bid = R.bid AND
+B.color = "Red" AND S.age < 30;
+\end{lstlisting}
 
+This query can be compiled into four different execution plans, these are show in figure \ref{fig:queryExecutionPlan}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.90]{images/logicalExecution.png}
+	\caption{Same query represented by four different execution plans \protect\cite{LectureDB}. }
+	\label{fig:queryExecutionPlan}
+\end{figure}
+
+The DBMS engine can then use a combination of information on the size of each leaf, which is provided through table schema, with dynamic programming in order to find the best execution plan.
 
 \section {Map Reduce}
 
@@ -161,7 +189,6 @@ Hadoop consist of three layers:
 The HDFS layer is Hadoop's storage layer.  The HDFS structures data in blocks that is managed by a master node, when the map reduce runs, the master node will assign each individual mapper data chunks as broken down by the HDFS.  More importantly, the HDFS layer has the is one major component Hadoop Map Reduce's mechanism for
 fault tolerance.  The application layer sits on top of the map reduce layer.  The application layer consists of several additions to the standard map reduce framework, these include high level languages, database adaptations.  These application layer additions will be discussed later on in this survey paper.
 
-
 \subsection{Parallel and Distributed Computation}
 
 The main advantage of the map reduce concept is that there are no dependency between mappers or mappers.  Map reduce therefore is extremely scalable, adding additional nodes either through adding additional cores or compute nodes is a relatively simple task.  This design is very similar to that of the share nothing architecture found in parallel DBMS systems.
@@ -183,7 +210,6 @@ Hadoop's fault tolerance mechanism is extremely basics, it achieves fault tolera
 	\textbf{Worker Failure}
 	
 	Worker failures happen when the worker stops responding to the master node.  Worker failures can occur from (1) hardware failures such as a broken hard disk or (2) network switch failures such that the worker node cannot be contacted.
-	
 	
 	\item 
 	

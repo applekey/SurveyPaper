@@ -11,6 +11,10 @@ David DeWitt and Jim Gray,
   systems,''
 \newblock {\em Communications of the ACM}, vol. 35, no. 6, pp. 85--98, 1992.
 
+\bibitem{LectureDB}
+Bowers Shaw,
+\newblock ``Database management systems,'' University Lecture, 2009.
+
 \bibitem{dean2001mapreduce}
 Jeffrey Dean and Sanjay Ghemawat,
 \newblock ``Mapreduce: Simplified data processing on large clusters, osdi’04:
