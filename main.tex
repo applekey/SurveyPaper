@@ -32,7 +32,7 @@
 \title{\Large \bf A Comparison of Distributed Data Processing Systems}
 \author{
 Vincent M Chen\\
-Information and Computer science Department\\
+Information and Computer Science Department\\
 University of Oregon\\
 {\em applekey@cs.uoregon.edu}
 }
@@ -40,19 +40,20 @@ University of Oregon\\
 
 \begin{abstract}
 	
-	This survey paper is intended to compare traditional distributed DBMS systems with newer Map Reduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
+	This survey paper is intended to compare traditional distributed DBMS systems with newer MapReduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
 \end{abstract}
 
 \section{Introduction}
-The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more precisely, in 2003, 6.8 exabytes were being created every 2 days,\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
+The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more precisely a survey conducted in 2003 found that 6.8 exabytes were being created every 2 days\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
 \par
-In order to solve this problem, a very important insight is to notice that a large majority of the data being created is independent from each other, ex. different users on an on-line shopping platform where every shopper has their own independent profile, shopping cart and payment information.  Independence within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many sub tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
+In order to solve this problem, parallel and distributed computation frameworks leverage the power of multiple processors in order to resolve queries that work on data is independent from each other.  For example,  different users on an on-line shopping platform where every shopper has their own independent profile, shopping cart and payment information.  Independence within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many independent tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
 \par
-These parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  As well, alternative computation frameworks introduced recently such as map reduce or Apache Spark have taken a  similarly approach to that used by databases, parallel computation.  The goal of this survey paper is to firstly introduce these different data query systems and their variants.  Secondly, discuss the common approaches all of them use to speed up computation and finally highlight unique aspects of each system.
+Parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  More recently, newer frameworks such as  MapReduce or Apache Spark have adopted and re-invented the parallel and distributed computation model of past distributed and parallel database systems.  The goal of this survey paper is to firstly introduce these different data query systems and their variants.  Secondly, discuss the common approaches all of them use to speed up computation, and finally highlight unique aspects of each system.
 
 \section{Basic Description of Functionality}
 
-A data processing solution should satisfy the following functionality:
+A data processing framework should provide the following fundamental features:
+\ \\
 \begin{enumerate}	
 \setlength\itemsep{1em}
 	\item Guarantee high degree of fault tolerance.
@@ -60,21 +61,21 @@ A data processing solution should satisfy the following functionality:
 \end{enumerate}
 
 \subsection{Fault Tolerance}
-Fault tolerance is the most important guarantee that a computation framework provides.  Without consistency, the data being returned from the query cannot be used for any meaningful analysis. Fault tolerance means recovery from failure from multiple sources
+Fault tolerance guarantees the reliability of data being processed.  Without this guarantee, the data being returned from any query cannot be used for any meaningful analysis.   Fault tolerance covers errors from a few different sources.
 \  \\
 \begin{enumerate}
 	\setlength\itemsep{1em}
-	\item Network fault, communication between compute nodes is unreliable and data is lost in between
-	\item System fault, OS failure
-	\item Hardware fault, compute computer hard disk fails
-	\item User fault, user query has code that leaves query engine in a bad state
+	\item Network fault - communication between nodes is unreliable and data is lost in between.
+	\item System fault - OS failure.
+	\item Hardware fault - memory, hard disk, component heat death.
+	\item User fault - user query has code that leaves query engine in a bad state.
 \end{enumerate}
 \  \\
-In order for user defined queries to complete in a reasonable time, two levels of parallelization can be applied.
+In order to speed up a user's query running on a sequential database system, there are two categories of parallelization that a database system can leverage.
 
 \subsection{Parallel Computation}
 The framework can process independent queries in parallel.  For example, searching for all students who owe more than 10,000 dollars in student loans
-can be queried in parallel, each student can be treated independently.
+can be queried in parallel, each student's data can be treated independently.
 
 \subsection{Distributed Computation}
 The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example in figure \ref{fig:distDataDependency}, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
@@ -492,7 +493,7 @@ This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 c
 \end{figure}
 
 \subsubsection{Application Level Frameworks}
-Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational querry language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
+Apache Spark is tiered similar to Hadoop, it includes the lower level HDFS which the Spark Engine uses for fault tolerance.  On top, there are 4 major application's.  These are Spark SQL, Spark's relational query language, like SCOPE, Pig and Hive.  Spark streaming, a real time stream data processing engine.  MLlib a machine learning library and GraphX, a graph computation library.
 
 \section{Map Reduce Fault Tolerance}
 
@@ -500,9 +501,7 @@ Hadoop has an extremely naive algorithm in order to handle failed nodes.   When 
 
 \subsection{Faulty Facebook Example}
 
-%Facebook typically load about 10 TB of compressed data per day.  Suppose that given 100 workers with each capable of performing two mappings concurently.  Using input splits of 256 MB,  a workload of 10 TB will require ~400 mapper invokes.  Also, lets suppose that each mapper takes 17 seconds to run, so in total 400 mappers will take ~520 seconds.  
-%\par
-Since failures are very common in Map Reduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occured.
+Since failures are very common in Map Reduce, most of the times from bad input data.  Suppose that each input data has a bad record in the middle of its records.  Each mapper will process half its data before it finds a fault and stops responding.  Hadoop's default failure mechanisms is to try at least two additional on the same node times before it gives up.  This results in a total of 8.5 (half of 17) × 2 × 200 ~500 seconds recovery time, about the same time if the no faults had occurred.
 
 \subsection{Local Checkpoints}
 
