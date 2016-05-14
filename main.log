@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 14:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAY 2016 16:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,15 +358,15 @@ Underfull \hbox (badness 2680) in paragraph at lines 55--56
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--61
+Underfull \hbox (badness 10000) in paragraph at lines 60--62
 
  []
 
 
-Underfull \vbox (badness 2229) has occurred while \output is active []
+Underfull \vbox (badness 7814) has occurred while \output is active []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--70
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
@@ -378,10 +378,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--70
 File: images/parallelComputation.png Graphic file (type png)
 
 <use images/parallelComputation.png>
-Package pdftex.def Info: images/parallelComputation.png used on input line 90.
+Package pdftex.def Info: images/parallelComputation.png used on input line 92.
 (pdftex.def)             Requested size: 246.7914pt x 167.17738pt.
 
-Overfull \hbox (3.29294pt too wide) in paragraph at lines 90--91
+Overfull \hbox (3.29294pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
@@ -389,22 +389,29 @@ Overfull \hbox (3.29294pt too wide) in paragraph at lines 90--91
 File: images/parDBMS.png Graphic file (type png)
 
 <use images/parDBMS.png>
-Package pdftex.def Info: images/parDBMS.png used on input line 108.
+Package pdftex.def Info: images/parDBMS.png used on input line 110.
 (pdftex.def)             Requested size: 140.0773pt x 140.0773pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--120
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--122
 
  []
 
-[2 <./images/parallelComputation.png> <./images/parDBMS.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2 <./images/parallelComputation.png> <./images/parDBMS.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 139.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 141.
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
@@ -412,15 +419,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 154--155
 File: images/dbmsDataPartition.png Graphic file (type png)
 
 <use images/dbmsDataPartition.png>
-Package pdftex.def Info: images/dbmsDataPartition.png used on input line 158.
+Package pdftex.def Info: images/dbmsDataPartition.png used on input line 160.
 (pdftex.def)             Requested size: 203.76074pt x 60.22484pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--170
+Underfull \hbox (badness 10000) in paragraph at lines 170--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--178
+Underfull \hbox (badness 10000) in paragraph at lines 178--180
 
  []
 
@@ -431,7 +438,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.178 \begin{lstlisting} [caption=SQL Join]
+l.180 \begin{lstlisting} [caption=SQL Join]
                                            
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -446,7 +453,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.178 \begin{lstlisting} [caption=SQL Join]
+l.180 \begin{lstlisting} [caption=SQL Join]
                                            
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -461,7 +468,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.178 \begin{lstlisting} [caption=SQL Join]
+l.180 \begin{lstlisting} [caption=SQL Join]
                                            
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -476,7 +483,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.183 \end{lstlisting}
+l.185 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -491,7 +498,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.183 \end{lstlisting}
+l.185 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -506,7 +513,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.183 \end{lstlisting}
+l.185 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -518,10 +525,10 @@ If that doesn't work, type  X <return>  to quit.
 File: images/logicalExecution.png Graphic file (type png)
 
 <use images/logicalExecution.png>
-Package pdftex.def Info: images/logicalExecution.png used on input line 189.
+Package pdftex.def Info: images/logicalExecution.png used on input line 191.
 (pdftex.def)             Requested size: 293.1244pt x 342.33981pt.
 
-Overfull \hbox (49.62595pt too wide) in paragraph at lines 189--190
+Overfull \hbox (49.62595pt too wide) in paragraph at lines 191--192
  [][] 
  []
 
@@ -530,50 +537,53 @@ Overfull \hbox (49.62595pt too wide) in paragraph at lines 189--190
 File: images/mapReduce.png Graphic file (type png)
 
 <use images/mapReduce.png>
-Package pdftex.def Info: images/mapReduce.png used on input line 211.
+Package pdftex.def Info: images/mapReduce.png used on input line 213.
 (pdftex.def)             Requested size: 247.04234pt x 168.75003pt.
 
-Overfull \hbox (3.54388pt too wide) in paragraph at lines 211--212
+Overfull \hbox (3.54388pt too wide) in paragraph at lines 213--214
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 220--222
+Underfull \hbox (badness 10000) in paragraph at lines 222--224
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--240
+Underfull \hbox (badness 10000) in paragraph at lines 240--242
 
  []
 
 [4 <./images/mapReduce.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--319
+Underfull \hbox (badness 10000) in paragraph at lines 319--321
 
  []
 
 [5]
-Underfull \hbox (badness 1270) in paragraph at lines 345--346
+Underfull \hbox (badness 1270) in paragraph at lines 347--348
 []\T1/ptm/m/n/10 Again, Hadoop is con-sid-er-ably slower than DBMS-x
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 352.
-[6] <images/mapReduceJoin.png, id=37, 599.841pt x 596.2275pt>
+(Font)              <7> on input line 354.
+[6] <images/mapReduceJoin.png, id=36, 599.841pt x 596.2275pt>
 File: images/mapReduceJoin.png Graphic file (type png)
 
 <use images/mapReduceJoin.png>
-Package pdftex.def Info: images/mapReduceJoin.png used on input line 415.
+Package pdftex.def Info: images/mapReduceJoin.png used on input line 417.
 (pdftex.def)             Requested size: 256.07773pt x 398.34224pt.
 
-Overfull \hbox (12.57927pt too wide) in paragraph at lines 415--416
+Overfull \hbox (12.57927pt too wide) in paragraph at lines 417--418
  [][] 
  []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 ! Package caption Error: Undefined format `listing'.
@@ -582,7 +592,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.421 \begin{lstlisting} [caption=Reduce join]
+l.423 \begin{lstlisting} [caption=Reduce join]
                                               
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -597,7 +607,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.421 \begin{lstlisting} [caption=Reduce join]
+l.423 \begin{lstlisting} [caption=Reduce join]
                                               
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -612,7 +622,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.421 \begin{lstlisting} [caption=Reduce join]
+l.423 \begin{lstlisting} [caption=Reduce join]
                                               
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -621,7 +631,7 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 423.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 425.
 
 ! Package caption Error: Undefined format `listing'.
 
@@ -629,7 +639,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.431 \end{lstlisting}
+l.433 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -644,7 +654,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.431 \end{lstlisting}
+l.433 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -659,7 +669,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.431 \end{lstlisting}
+l.433 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -667,7 +677,10 @@ section about errors.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[7 <./images/mapReduceJoin.png>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <./images/mapReduceJoin.png>]
 
 ! Package caption Error: Undefined format `listing'.
 
@@ -675,7 +688,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.457 ...ption = Iterative loop MapReduce program]
+l.459 ...ption = Iterative loop MapReduce program]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -690,7 +703,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.457 ...ption = Iterative loop MapReduce program]
+l.459 ...ption = Iterative loop MapReduce program]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -705,7 +718,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.457 ...ption = Iterative loop MapReduce program]
+l.459 ...ption = Iterative loop MapReduce program]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -720,7 +733,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.462 \end{lstlisting}
+l.464 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -735,7 +748,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.462 \end{lstlisting}
+l.464 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -750,7 +763,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.462 \end{lstlisting}
+l.464 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -759,7 +772,7 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (13.4291pt too wide) in paragraph at lines 468--469
+Overfull \hbox (13.4291pt too wide) in paragraph at lines 470--471
 []\T1/ptm/m/n/10 Pregel im-ple-ments the Bulk Syn-chronous Par-al-lel mode(BSP)
 ,
  []
@@ -768,32 +781,35 @@ Overfull \hbox (13.4291pt too wide) in paragraph at lines 468--469
 File: images/logicalRegression.png Graphic file (type png)
 
 <use images/logicalRegression.png>
-Package pdftex.def Info: images/logicalRegression.png used on input line 479.
+Package pdftex.def Info: images/logicalRegression.png used on input line 481.
 (pdftex.def)             Requested size: 240.90186pt x 158.99521pt.
 
 <images/sparkPerformance.png, id=43, 608.2725pt x 269.005pt>
 File: images/sparkPerformance.png Graphic file (type png)
 
 <use images/sparkPerformance.png>
-Package pdftex.def Info: images/sparkPerformance.png used on input line 488.
+Package pdftex.def Info: images/sparkPerformance.png used on input line 490.
 (pdftex.def)             Requested size: 284.52756pt x 125.83307pt.
 
-Overfull \hbox (41.0291pt too wide) in paragraph at lines 488--489
+Overfull \hbox (41.0291pt too wide) in paragraph at lines 490--491
  [][] 
  []
 
-[8 <./images/logicalRegression.png> <./images/sparkPerformance.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 506--508
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8 <./images/logicalRegression.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 508--510
 
  []
 
 
-Underfull \hbox (badness 1057) in paragraph at lines 517--519
+Underfull \hbox (badness 1057) in paragraph at lines 519--521
 \T1/ptm/m/n/10 three is-sues by adopt-ing a hy-brid ap-proach in be-tween
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--519
+Underfull \hbox (badness 10000) in paragraph at lines 519--521
 
  []
 
@@ -804,7 +820,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.532 ...ing} [caption = Group by benchmark query]
+l.534 ...ing} [caption = Group by benchmark query]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -819,7 +835,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.532 ...ing} [caption = Group by benchmark query]
+l.534 ...ing} [caption = Group by benchmark query]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -834,7 +850,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.532 ...ing} [caption = Group by benchmark query]
+l.534 ...ing} [caption = Group by benchmark query]
                                                   
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -849,7 +865,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.536 \end{lstlisting}
+l.538 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -864,7 +880,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.536 \end{lstlisting}
+l.538 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -879,7 +895,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.536 \end{lstlisting}
+l.538 \end{lstlisting}
                       
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -887,18 +903,18 @@ section about errors.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-<images/raftBenchmark.png, id=49, 383.4325pt x 294.09875pt>
+<images/raftBenchmark.png, id=48, 383.4325pt x 294.09875pt>
 File: images/raftBenchmark.png Graphic file (type png)
 
 <use images/raftBenchmark.png>
-Package pdftex.def Info: images/raftBenchmark.png used on input line 540.
+Package pdftex.def Info: images/raftBenchmark.png used on input line 542.
 (pdftex.def)             Requested size: 230.06126pt x 176.4606pt.
-
-Underfull \hbox (badness 2334) in paragraph at lines 549--550
+ [9 <./images/sparkPerformance.png> <./images/raftBenchmark.png>]
+Underfull \hbox (badness 2334) in paragraph at lines 551--552
 []\T1/ptm/m/n/10 This tech-nique of par-ti-tion-ing data into in-de-pen-dent
  []
 
-[9 <./images/raftBenchmark.png>] (./main.bbl
+(./main.bbl
 Underfull \hbox (badness 10000) detected at line 3
 \T1/ptm/m/n/8 [1]
  []
@@ -956,7 +972,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5505 strings out of 493089
  81729 string characters out of 6134842
- 147966 words of memory out of 5000000
+ 157966 words of memory out of 5000000
  8869 multiletter control sequences out of 15000+600000
  67265 words of font info for 123 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -968,7 +984,7 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (10 pages, 646161 bytes).
+Output written on main.pdf (10 pages, 646340 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream

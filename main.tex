@@ -44,17 +44,18 @@ University of Oregon\\
 
 \begin{abstract}
 	
-	This survey paper is intended to compare traditional distributed DBMS systems with newer MapReduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that MapReduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
+	This survey paper is intended to compare traditional distributed DBMS systems with newer MapReduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that MapReduce fails in comparison to distributed DBMS systems.  The paper will finally cover subsequent research intended to address the short comings of the MapReduce framework.
 \end{abstract}
 
 \section{Introduction}
-The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more precisely a survey conducted in 2003 found that 6.8 exabytes were being created every 2 days\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a users' account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
+The explosion of data in the past decade has lead to many questions in finding the most efficient method in order to analyze the data being generated. Best put by Google's CEO, Eric Schmidt, "There were 5 exabytes of information created by the entire world between the dawn of civilization and 2003. Now that same amount is created every two days.", more precisely a survey conducted in 2003 found that 6.8 exabytes were being created every 2 days\cite{gantz2010digital}.  With such a large volume of throughput, trivial tasks such as locating a user's account or finding all users within the same group can't be found in meaningful time with a single computers nor using sequential algorithms.
 \par
-In order to solve this problem, parallel and distributed computation frameworks leverage the power of multiple processors in order to resolve queries that work on data is independent from each other.  For example,  different users on an on-line shopping platform where every shopper has their own independent profile, shopping cart and payment information.  Independence within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many independent tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
+In order to solve this problem, parallel and distributed computation frameworks leverage the power of multiple processors in order to resolve queries that work on independent data.  For example,  different users on an on-line shopping platform where every shopper has their own independent profile, shopping cart and payment information.  Independence within the data means that parallel computation can be used, where instead of a single computer processing data sequentially, the job is divided into many independent tasks and processed in parallel.  This allows the computation of a large data set to be divided among the processing power of multiple computers.
 \par
 Parallel computation systems have existed since the 1980's, the most common of which are database systems. In the time since, many database systems have evolved into both parallel and distributed varieties.  More recently, newer frameworks such as  MapReduce or Apache Spark have adopted and re-invented the parallel and distributed computation model of past distributed and parallel database systems.  The goal of this survey paper is to firstly introduce these different data query systems and their variants.  Secondly, discuss the common approaches all of them use to speed up computation, and finally highlight unique aspects of each system.
 
-\section{Basic Description of Functionality}
+%Basic Description of Functionality
+\section{Fundamental Data Processing Framework Features}
 
 A data processing framework should provide the following fundamental features:
 \ \\
@@ -75,6 +76,7 @@ Fault tolerance guarantees the reliability of data being processed.  Without thi
 	\item User fault - user query has code that leaves query engine in a bad state.
 \end{enumerate}
 \  \\
+Data processing frameworks also need the ability to complete a user's query in an appropriate amount of time.  If it takes days to complete a simple query, the results of the data may have expired in relevance.
 In order to speed up a user's query running on a sequential database system, there are two categories of parallelization that a database system can leverage.
 
 \subsection{Parallel Computation}
@@ -82,7 +84,7 @@ The framework can process independent queries in parallel.  For example, searchi
 can be queried in parallel, each student's data can be treated independently.
 
 \subsection{Distributed Computation}
-The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example in figure \ref{fig:distDataDependency}, machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
+The framework is able to distribute the data set across multiple compute machines.  Each machine might contain independent data, for example, one machine contains all students with first names starting A to J and another from K to Z.  Another case is multiple machines hold data that is related to one another.  For example, in figure \ref{fig:distDataDependency} machine A might hold all student's GPA and Awards and another machine holds the student's student loan amount.
 If the query were to find all students that had more than 10,000 in student loans but also a 4.0 GPA in order to give them a financial award, then each query per student would need to look at the data in both compute machines.
 
 \begin{figure}[h]
@@ -95,13 +97,13 @@ If the query were to find all students that had more than 10,000 in student loan
 \section{Databases Management Systems}
 
 Databases management systems are frameworks that are designed to store data in tabular tables with a set schema.  DBMS systems use relational queries to perform CRUD 
-(Create, read, update and delete)operations on the stored data.  
+ (Create, read, update and delete) operations on the stored data.  
 
 %%\fix{write more here}
 
 \subsection{Parallel DBMS}
 
-Relational queries are ideal suited to run parallel since each operation declares independent operations on independent data sets \cite{dewitt1992parallel}.  By partitioning the data among multiple processors, a single query can be carried out in parallel and the result merged into a final step.  In figure \ref{fig:disDBMS}, an independent scan (ex. look for key word) is applied and the results are sorted by binning by first letter. The final result of each independent operation is merged into the final result.
+Relational queries are idealy suited to run parallel since each operation declares independent operations on independent data sets \cite{dewitt1992parallel}.  By partitioning the data among multiple processors, a single query can be carried out in parallel and the result merged into a final step.  In figure \ref{fig:disDBMS}, an independent scan (ex. look for key word) is applied and the results are sorted by binning by first letter. The final result of each independent operation is merged into the final result.
 
 \begin{figure}[h]
 \centering
@@ -112,7 +114,7 @@ Relational queries are ideal suited to run parallel since each operation declare
 
 \subsection{Distributed DBMS}
 
-Distributed DBMS systems are an additional layer of abstraction on top of Parallel DBMS.  Where in parallel DBMS systems, all queries are run on the same machine sharing the same memory space.  Distributed DBMS systems access memory through a shared memory controller.  This memory controller is often not local and instead accessed through a router.  Distributed DBMS systems need to consider the additional factor of latency when access data that does not reside in the current compute machine.  A large factor in determining the performance of a distributed DBMS system is how efficient the memory layout is such that network traffic between different nodes is minimized. 
+Distributed DBMS systems are an additional layer of abstraction on top of parallel DBMS.  Where in parallel DBMS systems, all queries are executed on the same machine sharing the same memory space.  Distributed DBMS systems access memory through a shared memory controller.  This memory controller is often not local and instead accessed through a network switch.  Distributed DBMS systems need to consider the additional factor of latency when accessing data that does not reside in the current compute machine.  A large factor in determining the performance of a distributed DBMS system is how efficient the memory layout is such that network traffic between different nodes is minimized. 
 
 Generally speaking, there are three main types of memory 
 architectures for distributed DBMS systems, Shared-Nothing, Shared-Memory, Shared-Disk.
@@ -124,12 +126,12 @@ architectures for distributed DBMS systems, Shared-Nothing, Shared-Memory, Share
 \item Shared-Nothing: Each compute machine owns their own memory and disk. 
 \end{enumerate}
 \ \\
-Share-Nothing architectures have being adopted with wide popularity due to its characteristics of minimizing resource sharing.  In addition, the lack of a Shared-Memory or hard disk means that commodity interconnection networking switches can be used.  This characteristic of minimal dependence between nodes and the lack of an interconnect fabric enable Shared-Nothing architectures to have many backup and duplication layers allowing for better reliability.  In summary, Shared-Nothing architectures enable scaling to happen at a massive scale.  For example, in the 1990's the largest Shared-Nothing system was Intel's 2000 node Hypercube, while many competing Shared-Memory multi-processors were limited to only about 32 processors. 
+Share-Nothing architectures have being adopted with wide popularity due to its characteristics of minimizing resource sharing.  In addition, the lack of a shared memory or hard disk means that commodity interconnection networking switches can be used.  This characteristic of minimal dependence between nodes and the lack of an interconnect fabric enable Shared-Nothing architectures to have numerous backup and duplication layers allowing for better reliability.  This allows Shared-Nothing architectures to easily scale to massive network of nodes.  For example, in the 1990's the largest Shared-Nothing system was Intel's 2000 node Hypercube, while many competing Shared-Memory multi-processors were limited to only about 32 processors. 
 \par
-Shared-Memory and Shared-Disk systems do not scale as well due to excessive inter-node network traffic.  During a computation, the shared network switch quickly becomes a bottleneck, any advantage gained from accessing shared memory quickly dissolves as the network struggles to keep up with all compute node's requests \cite{thakkar1990performance}.  There have being many attempts to implement affinity scheduling much like processor affinity to a particular processor, but these attempts have not yielded any favorable results.  
+Shared-Memory and Shared-Disk systems do not scale as well due to excessive inter-node network traffic.  During an execution, the shared network switch quickly becomes a bottleneck, any advantage gained from accessing shared memory quickly dissolves as the network struggles to keep up with all compute node's requests \cite{thakkar1990performance}.  There have being many attempts to implement affinity scheduling much like processor affinity to a particular processor, but these attempts have not yielded any favorable results.  
 \subsection{Data Partitioning}
 
-Data Partitioning is a Shared-Nothing splitting strategy that splits a large dataset across multiple disks.  This strategy is used to utilize the I/O bandwidth of multiple disks' read and written in parallel for data independent queries.  There are three common methods, the goal of all three is to minimize the amount of un-necessary communication between disks by placing data needed by independent compute nodes locally within their assigned disk. Figure \ref{fig:dbmsDataPartition} gives a visual representation of each.
+Data Partitioning is a Shared-Nothing splitting strategy that splits a large dataset across multiple disks.  This strategy is used to utilize the I/O bandwidth of multiple disks for data independent queries.  There are three common methods, the goal of all three is to minimize the amount of un-necessary communication between disks by placing data needed by independent compute nodes locally within their assigned disk. Figure \ref{fig:dbmsDataPartition} gives a visual representation of each.
 
 \  \\
 \begin{enumerate}
@@ -148,7 +150,7 @@ Data Partitioning is a Shared-Nothing splitting strategy that splits a large dat
 	\item 
 	
 	\textbf{Range Partitioning}
-	Range Partitioning is ideal for sequential and associate data access.  One major issue with this partition scheme is if the data is not fairly partitioned, data skew can arrise where all data is in one partition.
+	Range Partitioning is ideal for sequential and associate data access.  One major issue with this partition scheme is if the data is not fairly partitioned, data skew can arise where all data is in one partition.
 	
 \end{enumerate}
 \  \\
@@ -161,8 +163,8 @@ Data Partitioning is a Shared-Nothing splitting strategy that splits a large dat
 \end{figure}
 
 \subsection{Fault Tolerance}
-DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the Basic Description of Functionality section.  DBMS systems take advantage of the schema and transactions to implement restart at different granularity levels.  By using these different transaction levels, DBMS systems are able to 
-take advantage of the work that has already being completed and restart at the most optimal point before the crash.
+DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the Fundamental Data Processing Features section.  In general, DBMS systems take advantage of the schema and transactions to implement restart from failures at different granularity levels.  By using these different transaction levels, DBMS systems are able to 
+take advantage of the work that has already being completed and restart at the optimal point before the crash.
 
 \subsection{Optimizations}
 DBMS systems use table schemas and indexing in order to allow the relational SQL query language to both logically analyze(static optimization) as well as dynamically adjust query execution based on the layout and size of the stored data per table. Take for example, the listing 1, given the tables:
@@ -214,8 +216,8 @@ Figure \ref{fig:mapReduce} gives an execution diagram of the MapReduce framework
 \end{figure}
 
 \subsection{Hadoop}
-There are two very popular frameworks that implement the MapReduce programming model, these are the closed source Google MapReduce and open source version Hadoop MapReduce.  
-This paper will focus on Hadoop instead of Google MapReduce since the complete details of Google MapReduce and relatively unknown, however both frameworks function very similarly.
+There are two very popular frameworks that implement the MapReduce programming model, these are the closed source Google MapReduce and open source Hadoop MapReduce.  
+This paper will focus on Hadoop instead of Google MapReduce since the complete details of Google MapReduce are relatively unknown, however both frameworks function very similarly.
 \par
 Hadoop consist of three layers:
 \  \\
