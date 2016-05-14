@@ -429,11 +429,11 @@ Joins in MapReduce are run in $O(n^2)$ time due to lack of help from indexes or 
 
 \section{MapReduce Applications}
 
-Since the introduction of the MapReduce concept and its widespread adoption, either through Hadoop or Google MapReduce, there have being many application level frameworks designed to address the several issues covered earlier.
+Since the introduction of the MapReduce programming model and its widespread adoption there have being many application level frameworks designed to address the several issues covered earlier.
 
 \subsection{High Level Languages}
 
-There have being several efforts in order to in corporate a more relational language on top of MapReduce.  Higher level languages will enable a whole host of optimizations DBMS systems currently take advantage of.  This include static query optimization and easier MapReduce module sharing among developers.  These are Microsoft SCOPE\cite{chaiken2008scope}, Apache Pig \cite{olston2008pig} and Apache Hive\cite{thusoo2009hive}.
+There have being several efforts in order to incorporate a relational language on top of MapReduce.  Higher level languages will enable a whole host of optimizations DBMS systems currently take advantage of.  This include static query optimization and easier MapReduce module sharing among developers.  These are Microsoft SCOPE\cite{chaiken2008scope}, Apache Pig \cite{olston2008pig} and Apache Hive\cite{thusoo2009hive}.
 \par
 Pig is an open source project motivated by the Google MapReduce's scripting language built on top of Hadoop.  Pig consists of two components, the language called Pig Latin and the execution framework.  The language Pig Latin supports nested data models and pre-defined UDF's that can be customized.  The Pig execution framework uses a logical analyzer to plan out the best query plan given the Pig Latin query input.
 \par
@@ -443,7 +443,7 @@ SCOPE is a Microsoft framework that sits on top of Microsoft's own MapReduce cal
 
 \subsection{Support for Schemas}
 
-In the earlier section \ref{mrVSDBMSSection} and \ref{fig:mrJoin}, the large disadvantages of MapReduce's lack of a schema was detailed.   Repetitive record parsing and the in-ability to use acceleration data structures to speed up tasks such as joins cause up to a 36 times performance slow down.  Though there has being very little research in this area, the earliest suggest that data formats such as Google's Protocol Buffers,
+The earlier section \ref{mrVSDBMSSection} and \ref{fig:mrJoin} demonstrated the disadvantages of schema-less systems.   Repetitive record parsing and the in-ability to use acceleration data structures to speed up tasks such as joins cause up to a 36 times performance slow down.  Though there has being very little research in this area, the earliest suggest that data formats such as Google's Protocol Buffers,
 XML, JSON, Apache's Thrift, or other formats can be modified in order to very basic data integrity and perhaps more advance data compression \cite{yang2007map}.
 
 \subsection{Optimized Data Flow}
