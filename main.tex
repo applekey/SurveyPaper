@@ -40,7 +40,7 @@ University of Oregon\\
 
 \begin{abstract}
 	
-	This survey paper is intended to compare traditional distributed DBMS systems with newer Map Reduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will then cover the additional research that has being released in order to address these failures.
+	This survey paper is intended to compare traditional distributed DBMS systems with newer Map Reduce frameworks.    The paper will first give a brief description of the general similarities of both frameworks.  The paper will then delve into the areas that Map Reduce fails in comparison to distributed DBMS systems.  The paper will finally cover the additional research that has being released in order to address these short comings.
 \end{abstract}
 
 \section{Introduction}
@@ -119,6 +119,42 @@ architectures for distributed DBMS systems, shared-nothing, shared-memory, share
 \item Shared-Disk: Each compute machines have their own memory, but share global disk.
 \item Shared Nothing: Each compute machine has their own memory and disk. 
 \end{enumerate}
+\ \\
+Share Nothing architectures have being adopted with wide popularity due to its characteristics of minimizing resource sharing.  In addition, the lack of a shared memory or hard disk means that commodity interconnection networking can be used.  Such minimal dependence between nodes and the lack of an interconnect fabric enable Shared nothing architectures to have many backup and duplication layers allowing for better reliability.  In summary, shared nothing architectures enable scaling to happen at a massive scale.  To give an example, during the period of this research, the largest shared nothing system was Intel's 2000 node Hypercube, while many competing shared-memory multi-processors were limited to only about 32 processors. 
+\par
+Shared memory and shared disk systems do not scale as well due to the network traffic between all the compute nodes.  All compute nodes are competing for the network which is a shared resource, any advantage gained from accessing the shared memory quickly dissolves as the slowdown from the network becomes the major bottleneck \cite{thakkar1990performance}.  There have being many attempts to implement affinity scheduling much like processor affinity to a particular processor, but these attempts have not yielded favorable results.  
+\subsection{Data Partitioning}
+
+Data Partitioning involves a large dataset across multiple disks in order for distributed databases.   This strategy is used to utilize the I/O bandwidth of multiple disks read and written in parallel for data independent queries.  There are three common strategists, the goal of all three is to minimize the amount of un-necessary communication between disks by placing data needed by independent compute nodes locally within their assigned disk. Figure \ref{fig:dbmsDataPartition} gives a visual representation of the three.
+
+\  \\
+\begin{enumerate}
+	\setlength\itemsep{1em}
+	\item 
+	
+	\textbf{Round Robin}
+	
+	Round Robin is ideal if all compute nodes are accessing data by sequentially data on its of its queries.
+	\item 
+		
+	\textbf{Hash Partitioning}
+	
+	Hash Partitioning is idea if for computations that want only sequential and associate access to the data.  Data is organized to each disk by an associate hash transform such that each compute node does not need to look to other data partitions for additional data.
+	
+	\item 
+	
+	\textbf{Range Partitioning}
+	Range Partitioning is ideal for sequential and associate data access.  One major issue with this partition scheme is if the data is not fairly partitioned, data skew can arrise where all data is in one partition.
+	
+\end{enumerate}
+\  \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{images/dbmsDataPartition.png}
+	\caption{Three different types of data partitioning used by shared nothing DBMS  \protect\cite{dewitt1992parallel}.}
+	\label{fig:dbmsDataPartition}
+\end{figure}
 
 \subsection{Fault Tolerance}
 DBMS systems have very mature and well-studied failure mechanisms.  For the purpose of this survey paper, the exact details of each will not be discussed.  DBMS fault tolerance follow the general fault tolerance categories that were described in the general fault tolerance section.  DBMS systems take advantage of the schema and transactions implement restart at different granularity levels.  Through the use of larger compute node level transactions as well as much smaller procedural level transactions, DBMS systems are able to 
@@ -152,6 +188,8 @@ This query can be compiled into four different execution plans, these are show i
 \end{figure}
 
 The DBMS engine can then use a combination of information on the size of each leaf, which is provided through table schema, with dynamic programming in order to find the best execution plan.
+\par
+--> need to write something here about in memory tables
 
 \section {Map Reduce}
 
@@ -374,7 +412,7 @@ Joins in map reduce are run in $O(n^2)$ time due to lack of help from indexes or
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/mapReduceJoin.png}
+	\includegraphics[height = 13cm,width=9cm]{images/mapReduceJoin.png}
 	\caption{Join stages in map reduce}
 	\label{fig:mrJoin}
 \end{figure}
@@ -448,7 +486,7 @@ This benchmark was run with a 29 GB data set on 20 "m1.xlarg" EC2 nodes with 4 c
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.6]{images/sparkPerformance.png}
+	\includegraphics[width = 10 cm]{images/sparkPerformance.png}
 	\caption{Logical regression performance between Spark and Hadoop  \protect\cite{zaharia2010spark}.}
 	\label{fig:sparkPerformance}
 \end{figure}

@@ -11,6 +11,13 @@ David DeWitt and Jim Gray,
   systems,''
 \newblock {\em Communications of the ACM}, vol. 35, no. 6, pp. 85--98, 1992.
 
+\bibitem{thakkar1990performance}
+Shreekant~S Thakkar and Mark Sweiger,
+\newblock ``Performance of an oltp application on symmetry multiprocessor
+  system,''
+\newblock in {\em Computer Architecture, 1990. Proceedings., 17th Annual
+  International Symposium on}. IEEE, 1990, pp. 228--238.
+
 \bibitem{LectureDB}
 Bowers Shaw,
 \newblock ``Database management systems,'' University Lecture, 2009.
